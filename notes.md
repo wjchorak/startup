@@ -8,3 +8,18 @@
 - [Course instruction](https://github.com/webprogramming260)
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
+
+## Github
+
+My github accound is now set up and linked to VSCode.
+
+Git commands I should know:
+
+```shell
+git clone https://github.com/*SPECIFICURL*
+git pull origin *branch*
+git push origin *branch*
+git checkout -b *branch*
+git add -A
+git commit -m "Message here"
+```
