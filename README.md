@@ -21,12 +21,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-We may be at BYU, but let's face it - gambling is really fun. However, many of us do not want to put our bank accounts or eternal salvation in jeapordy through the sinful, financially risky practice of gambling. This fake-money blackjack website allows users to experience the fun of gambling without having to go bankrupt or go to hell. Users can play blackjack against the computer dealer using standard rules, look at their win rate throughout previous games, and compare their success to other players. Each user who falls below the minimum threshold of fake money in their account will have a base amount replenished at the end of each day - enough to let them keep playing tomorrow, but little enough to keep them worried about losing it for the authentic gambling experience.
+We may be at BYU, but let's face it - gambling is really fun. However, many of us do not want to put our bank accounts or eternal salvation in jeapordy through the sinful, financially risky practice of gambling. This fake-money blackjack website allows users to experience the fun of gambling without having to go bankrupt or go to hell. Users can play blackjack against the computer dealer using standard rules, look at their win rate throughout previous games, and compare their success to other players. Each user who falls below the minimum threshold of credits in their account will have a base amount replenished at the end of each day - enough to let them keep playing tomorrow, but little enough to keep them worried about losing it for the authentic gambling experience.
 
 ### Design
 
@@ -47,12 +47,16 @@ Here is a basic mockup of how the website would look during the game. It would a
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - HTML used appropriately throughout. Three pages: about, login, game.
+- **CSS** - CSS styling that is clear and clean to minimize user confusion. Colors and space will be neatly used and the cards will be easy to read.
+- **React** - Login/logout and all interactive gameplay components. Backend endpoint calls will also be performed here.
+- **Service** - Endpoints will be implemented to support:
+  - Log in/out
+  - Storing of data after each round of the game
+  - Storing/retrieving a user's credits
+  - Displaying jokes from [Geek Jokes API](https://github.com/sameerkumar18/geek-joke-api) on the "about" page
+- **DB/Login** - Authentification information, previous games, and credit amounts will be stored in the database.
+- **WebSocket** - The current scores/credit amounts for each player will be displayed on a leaderboard and updated in realtime.
 
 ## 🚀 AWS deliverable
 
