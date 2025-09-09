@@ -20,7 +20,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x] Description of key features
 - [ ] Description of how you will use each technology
 - [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
@@ -36,9 +36,12 @@ Here is a basic mockup of how the website would look during the game. It would a
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login over https
+- Display of cards
+- Options to deal cards, double down, hit, and stand
+- Credits replenish daily at midnight
+- Leaderboard of top scores from players, updated in realtime
+- "About" page with website information and blackjack rules
 
 ### Technologies
 
