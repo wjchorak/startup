@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-We may be at BYU, but let's face it - gambling is really fun. However, many of us do not want to put our bank accounts or eternal salvation in jeapordy through the sinful, financially risky practice of gambling. This fake-money blackjack website allows users to experience the fun of gambling without having to go bankrupt or go to hell. Users can play blackjack by themselves or with friends against the computer dealer using standard rules, look at their win rate throughout previous games, and compare their success to friends. Each user who falls below the minimum threshold of fake money in their account will have a base amount replenished at the end of each day - enough to let them keep playing tomorrow, but little enough to keep them worried about losing it for the authentic gambling experience.
+We may be at BYU, but let's face it - gambling is really fun. However, many of us do not want to put our bank accounts or eternal salvation in jeapordy through the sinful, financially risky practice of gambling. This fake-money blackjack website allows users to experience the fun of gambling without having to go bankrupt or go to hell. Users can play blackjack against the computer dealer using standard rules, look at their win rate throughout previous games, and compare their success to other players. Each user who falls below the minimum threshold of fake money in their account will have a base amount replenished at the end of each day - enough to let them keep playing tomorrow, but little enough to keep them worried about losing it for the authentic gambling experience.
 
 ### Design
 
