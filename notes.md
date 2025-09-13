@@ -23,3 +23,9 @@ git checkout -b *branch*
 git add -A
 git commit -m "Message here"
 ```
+
+## My startup info
+
+IP address: 44.218.33.134
+
+URL: brighamblackjack.click
