@@ -1,5 +1,7 @@
 # Brigham's Blackjack
 
+[Play Here](https://brighamblackjack.click)
+
 ## 🚀 Specification Deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
