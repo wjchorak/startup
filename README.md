@@ -57,7 +57,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - Index page for login, Play page for the main game, and About page for rules and Joke API.
-- [x] **Proper HTML element usage** - I used appropraite HTML tags throughout, including <main>, <menu>, <nav>, <header>, <footer>, <div>, etc.
+- [x] **Proper HTML element usage** - I used appropraite HTML tags throughout, including main, menu, nav, header, footer, div, etc.
 - [x] **Links** - There are links between pages and a link to my github page.
 - [x] **Text** - The rules for the game are displayed on the about page, as well as a few other small text blocks.
 - [x] **3rd party API placeholder** - The About page has a placeholder where I will implement the Geek Jokes API.
