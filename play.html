@@ -27,86 +27,86 @@
         </header>
 
         <main>
-            <div id="top-display">
-                <div id="leaderboard">
-                    <!-- Websocket -->
-                    <table>
-                        <tr>
+            <div id="leaderboard">
+                <!-- Websocket -->
+                <table>
+                    <tr>
+                        <td>
+                            <span>Rank</span>
+                        </td>
+                        <td>
+                            <span>Name</span>
+                        </td>
+                        <td>
+                            <span>Score</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>1</span>
+                        </td>
+                        <td>
+                            <span id="player-rank-1">Name</span>
+                        </td>
+                        <td>
+                            <span id="player-score-1">1135</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>2</span>
+                        </td>
+                        <td>
+                            <span id="player-rank-2">Name</span>
+                        </td>
+                        <td>
+                            <span id="player-score-2">102</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>3</span>
+                        </td>
                             <td>
-                                <span>Rank</span>
-                            </td>
-                            <td>
-                                <span>Name</span>
-                            </td>
-                            <td>
-                                <span>Score</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>1</span>
-                            </td>
-                            <td>
-                                <span id="player-rank-1">Name</span>
-                            </td>
-                            <td>
-                                <span id="player-score-1">1135</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>2</span>
-                            </td>
-                            <td>
-                                <span id="player-rank-2">Name</span>
-                            </td>
-                            <td>
-                                <span id="player-score-2">102</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span>3</span>
-                            </td>
-                                <td>
-                                <span id="player-rank-3">Name</span>
-                            </td>
-                            <td>
-                                <span id="player-score-3">94</span>
-                            </td>
-                        </tr>
-                    </table>
+                            <span id="player-rank-3">Name</span>
+                        </td>
+                        <td>
+                            <span id="player-score-3">94</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="game">
+                <div class="card-container" id="dealer-cards">
+                    <!-- Cards will be dynamically rendered in here as new div containers using JS/React and styled with CSS -->
+                    <span>Dealer cards go here</span>
                 </div>
-                
-                <div id="current-credits">
-                    <span id="player-credits">$0</span>
-                    <!-- Database -->
+
+                <div class="card-container" id="player-cards">
+                    <!-- Same as above -->
+                    <span>Player cards go here</span>
+                </div>
+
+                <div id="controls">
+                    <div id="card-controls">
+                        <button>Hit</button>
+                        <button>Stand</button>
+                        <button>Double Down</button>
+                        <button>Deal Cards</button>
+                    </div>
+            
+                    <div id="bet-controls">
+                        <button>Increase Bet</button>
+                        <button>Decrease Bet</button>
+                        <button>Place Bet</button>
+                    </div>
                 </div>
             </div>
             
-            <div class="card-container" id="dealer-cards">
-                <!-- Cards will be dynamically rendered in here as new div containers using JS/React and styled with CSS -->
-                <span>Dealer cards go here</span>
-            </div>
-
-            <div class="card-container" id="player-cards">
-                <!-- Same as above -->
-                <span>Player cards go here</span>
-            </div>
-
-            <div id="controls">
-                <div id="card-controls">
-                    <button>Hit</button>
-                    <button>Stand</button>
-                    <button>Double Down</button>
-                    <button>Deal Cards</button>
-                </div>
-            
-                <div id="bet-controls">
-                    <button>Increase Bet</button>
-                    <button>Decrease Bet</button>
-                    <button>Place Bet</button>
-                </div>
+            <div id="current-credits">
+                <span id="player-credits">$0</span>
+                <!-- Database -->
             </div>
         </main>
 

@@ -7,12 +7,14 @@
 
 #current-credits {
     flex: 1;
-    float: right;
-    margin-left: auto;
+}
+
+#game {
+    flex: 2;
 }
 
 #leaderboard {
-    flex: 4
+    flex: 1
 }
 
 table {
