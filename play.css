@@ -1,0 +1,10 @@
+#top-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#current-credits {
+    float: right;
+    margin-left: 40%;
+}

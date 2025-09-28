@@ -1,14 +1,15 @@
 body {
     display: flex;
     flex-direction: column;
+    min-width: 375px;
 }
 
 header {
-    flex: 0 85px;
+    flex: 0 80px;
 }
 
 main {
-    flex: 1 calc(100vh - 115px);
+    flex: 1 calc(100vh - 110px);
     display: flex;
     flex-direction: column;
     align-items: center;
