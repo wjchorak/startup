@@ -9,7 +9,10 @@ body {
 }
 
 header {
-    flex: 0 60px;
+    background-color: #216869;
+    flex: 0 90px;
+    display: flex;
+    flex-direction: row;
 }
 
 main {
@@ -21,7 +24,31 @@ main {
     row-gap: 10px;
 }
 
+nav {
+    align-items: center;
+}
+
+menu {
+    flex: 1;
+    display: flex;
+    flex-direction: row !important;
+    list-style: none;
+}
+
+menu .nav-item {
+    margin: 8px;
+}
+
+.navbar-brand {
+    margin: 5px;
+    padding-left: 0.5em;
+    color: #9cc5a1 !important;
+    font-size: xx-large;
+    text-decoration: underline;
+}
+
 footer {
+    background-color: #216869;
     position: fixed;
     bottom: 0;
     width: 100%;
