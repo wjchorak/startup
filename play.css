@@ -1,5 +1,6 @@
 main {
     flex-direction: row;
+    flex: 1;
 }
 
 #top-display {
@@ -15,6 +16,12 @@ main {
 
 #game {
     flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-self: flex-start;
+    height: 95%;
 }
 
 #leaderboard {
@@ -45,6 +52,7 @@ main {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 130px;
 }
 
 .playing-card {

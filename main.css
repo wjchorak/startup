@@ -1,3 +1,7 @@
+html {
+    height: 100%
+}
+
 body {
     background-color: #1f2421;
     color: #dce1de;
@@ -5,6 +9,7 @@ body {
     flex-direction: column;
     height: 100%;
     min-width: 375px;
+    min-height: 100vh;
     overflow: hidden;
 }
 
@@ -74,7 +79,7 @@ footer {
     background-color: #216869;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 800px) {
     header {
         display: none;
     }
