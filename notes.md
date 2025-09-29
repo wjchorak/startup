@@ -29,3 +29,11 @@ git commit -m "Message here"
 IP address: 44.218.33.134
 
 URL: brighamblackjack.click
+
+## Color palette reference
+
+1F2421
+216869
+49A078
+9CC5A1
+DCE1DE

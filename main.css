@@ -1,4 +1,6 @@
 body {
+    background-color: #1f2421;
+    color: #dce1de;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -23,6 +25,45 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+#controls {
+    align-items: center;
+    justify-content: space-around;
+}
+
+#card-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#bet-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-outline {
+    align-items: center;
+    background-color: transparent;
+    border: 1px solid #49a078;
+    border-radius: 0.375rem;
+    color: #dce1de;
+    cursor: pointer;
+    display: inline-block;
+    height: 90px;
+    margin: 5px;
+    padding: 20px;
+    width: 90px;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button-outline:hover {
+    background-color: #216869;
 }
 
 @media (max-height: 600px) {
