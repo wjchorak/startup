@@ -27,25 +27,6 @@ footer {
     width: 100%;
 }
 
-#controls {
-    align-items: center;
-    justify-content: space-around;
-}
-
-#card-controls {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-
-#bet-controls {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
 .button-outline {
     align-items: center;
     background-color: transparent;
@@ -64,28 +45,6 @@ footer {
 
 .button-outline:hover {
     background-color: #216869;
-}
-
-.card-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.playing-card {
-    height: 120px;
-    width: 80px;
-    background-color: #9cc5a1;
-    border: 2px solid #49a078;
-    border-radius: 5px;
-    color: #216869;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    font-size: 2rem;
-    font-weight: bold;
 }
 
 @media (max-height: 600px) {
