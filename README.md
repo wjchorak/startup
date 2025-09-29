@@ -50,21 +50,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://startup.brighamblackjack.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - I did not complete this part of the deliverable.
-- [x] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [x] **Links** - I did not complete this part of the deliverable.
-- [x] **Text** - I did not complete this part of the deliverable.
-- [x] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [x] **Images** - I did not complete this part of the deliverable.
-- [x] **Login placeholder** - I did not complete this part of the deliverable.
-- [x] **DB data placeholder** - I did not complete this part of the deliverable.
-- [x] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - Index page for login, Play page for the main game, and About page for rules and Joke API.
+- [x] **Proper HTML element usage** - I used appropraite HTML tags throughout, including main, menu, nav, header, footer, div, etc.
+- [x] **Links** - There are links between pages and a link to my github page.
+- [x] **Text** - The rules for the game are displayed on the about page, as well as a few other small text blocks.
+- [x] **3rd party API placeholder** - The About page has a placeholder where I will implement the Geek Jokes API.
+- [x] **Images** - I don't specifically need images for the game itself so I included some memes on the about page.
+- [x] **Login placeholder** - The index landing page is a placeholder for a login page.
+- [x] **DB data placeholder** - DB will be used to store/retrieve per-user credit amounts, as well as data about the games they play.
+- [x] **WebSocket placeholder** - The leaderboard will be updated in realtime with websocket.
 
 ## 🚀 CSS deliverable
 
