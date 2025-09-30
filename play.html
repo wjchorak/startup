@@ -50,7 +50,7 @@
                             <span id="player-rank-1">Name</span>
                         </td>
                         <td>
-                            <span id="player-score-1">1135</span>
+                            <span id="player-score-1">$1135</span>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +61,7 @@
                             <span id="player-rank-2">Name</span>
                         </td>
                         <td>
-                            <span id="player-score-2">102</span>
+                            <span id="player-score-2">$102</span>
                         </td>
                     </tr>
                     <tr>
@@ -72,22 +72,27 @@
                             <span id="player-rank-3">Name</span>
                         </td>
                         <td>
-                            <span id="player-score-3">94</span>
+                            <span id="player-score-3">$94</span>
                         </td>
                     </tr>
                 </table>
+
+                <div id="current-credits">
+                    <span id="player-credits">Current Credits: $0</span>
+                    <!-- Database -->
+                </div>
             </div>
             
             <div id="game">
                 <div class="card-container" id="dealer-cards">
                     <!-- Cards will be dynamically rendered in here as new div containers using JS/React and styled with CSS -->
                     <div class="playing-card">K</div>
-                    <div class="playing-card">10</div>
                 </div>
 
                 <div class="card-container" id="player-cards">
                     <!-- Same as above -->
                     <div class="playing-card">7</div>
+                    <div class="playing-card">10</div>
                 </div>
 
                 <div id="controls">
@@ -95,19 +100,23 @@
                         <button class="button-outline">Hit</button>
                         <button class="button-outline">Stand</button>
                         <button class="button-outline">x2</button>
-                        <button class="button-outline">Deal</button>
                     </div>
             
                     <div id="bet-controls">
                         <button class="button-outline">+</button>
                         <button class="button-outline">-</button>
+                        <button class="button-outline">Deal</button>
                     </div>
                 </div>
             </div>
             
-            <div id="current-credits">
-                <span id="player-credits">$0</span>
-                <!-- Database -->
+            <div id="game-state">
+                <div id="current-turn">Your Turn...</div>
+                <div id="bet">Bet: $30</div>
+
+                <!-- current-turn will display your/dealer's turn, as well as win/lose after a game -->
+                <!-- bet will display the current bet and can be adjusted before dealing cards using the +/- buttons -->
+                <!-- I will wait until adding interactivity to make the choice on this, but if it makes more sense while playing I may have the +/-/deal buttons disappear while in game and the hit/stand/x2 buttons disappear out of game -->
             </div>
         </main>
 
