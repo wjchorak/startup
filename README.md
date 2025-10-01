@@ -70,12 +70,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Header and footer are consistent between pages and have been styled to have a title/logo and a navbar on the header and my name/github link on the footer. Login page has no navigation.
+- [x] **Navigation elements** - The header navbar has links to play and about pages, as well as a logout button that will log users out and return them to the login page.
+- [x] **Responsive to window resizing** - Used flexbox throughout. Per Dr. Ventura's suggestion, I didn't worry too much about mobile sizing, but the content is dynamically arranged, so it should work between different sizes alright.
+- [x] **Application elements** - Placeholders for game functions are styled. Includes buttons, cards, and the leaderboard.
+- [x] **Application text content** - Text used throughout, especially on the about page.
+- [x] **Application images** - Memes on the about page.
 
 ## 🚀 React part 1: Routing deliverable
 

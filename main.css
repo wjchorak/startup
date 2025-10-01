@@ -93,8 +93,8 @@ footer {
 }
 
 @font-face {
-  font-family: 'TitleFont';
-  src: url('SaintCarell_PERSONAL_USE_ONLY.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'TitleFont';
+    src: url('SaintCarell_PERSONAL_USE_ONLY.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
