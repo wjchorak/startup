@@ -1,0 +1,35 @@
+main {
+    flex-direction: row;
+}
+
+#login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-self: flex-start;
+    height: 70%;
+}
+
+#login-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.button-outline {
+    display: inline-flex;
+    height: 30px;
+    justify-content: center;
+    margin: 10px;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #dce1de;
+    outline: none;
+    padding: 8px 4px;
+    font-size: 16px;
+    color: #dce1de;
+    width: 100%;
+}
