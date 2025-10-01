@@ -105,3 +105,21 @@ td {
 tr:last-child td {
     border-bottom: none;
 }
+
+@media (max-width: 1000px) {
+    main {
+        overflow: scroll;
+        flex-direction: column;
+        margin: 5px;
+    }
+    #leaderboard {
+        align-self: center;
+    }
+    #game {
+        align-self: center;
+    }
+    #game-state {
+        margin-bottom: 30vh;
+        align-self: center;
+    }
+}

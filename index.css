@@ -33,3 +33,9 @@ input {
     color: #dce1de;
     width: 100%;
 }
+
+@media (max-width: 1000px) {
+    body {
+        overflow: scroll;
+    }
+}

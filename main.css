@@ -18,6 +18,7 @@ header {
     flex: 0 90px;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 main {
@@ -31,6 +32,7 @@ main {
 
 nav {
     align-items: center;
+    position: unset !important;
 }
 
 menu {
@@ -38,6 +40,7 @@ menu {
     display: flex;
     flex-direction: row !important;
     list-style: none;
+    margin-top: 0 !important;
 }
 
 menu .nav-item {
@@ -47,10 +50,10 @@ menu .nav-item {
 .navbar-brand {
     margin: 5px;
     padding-left: 0.5em;
-    margin-right: 40px;
+    margin-right: 3vw;
     color: #9cc5a1 !important;
     font-family: 'TitleFont', sans-serif;
-    font-size: 40pt;
+    font-size: xx-large;
 }
 
 footer {
@@ -80,7 +83,7 @@ footer {
     background-color: #216869;
 }
 
-@media (max-height: 800px) {
+@media (max-height: 600px) {
     header {
         display: none;
     }

@@ -1,9 +1,10 @@
 main {
     justify-content: flex-start;
     row-gap: 2px;
+    overflow: scroll;
 }
 
-@media (max-height: 890px), (max-width: 1000px) {
+@media (max-height: 600px) {
     header {
         display: none;
     }
@@ -12,5 +13,14 @@ main {
     }
     main {
         flex: 1 100vh;
+    }
+}
+
+@media (max-width: 1000px) {
+    main {
+        margin: 5px;
+    }
+    #disclaimer {
+        margin-bottom: 30vh;
     }
 }
