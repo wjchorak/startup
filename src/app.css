@@ -2,7 +2,7 @@ html {
     height: 100%
 }
 
-body {
+.body {
     background-color: #1f2421;
     color: #dce1de;
     display: flex;
