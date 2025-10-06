@@ -5,7 +5,7 @@ import './app.css';
 export default function App() {
     return (
         <div className="body">
-            <header>
+            <header id="page-header">
                 <nav class="navbar fixed-top navbar-dark">
                     <h1 class="navbar-brand" href="#">Blackjack</h1>
                 </nav>
