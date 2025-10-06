@@ -1,0 +1,25 @@
+{
+  "name": "startup",
+  "version": "1.0.0",
+  "description": "[Play Here](https://brighamblackjack.click)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wjchorak/startup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wjchorak/startup/issues"
+  },
+  "homepage": "https://github.com/wjchorak/startup#readme",
+  "devDependencies": {
+    "vite": "^7.1.9"
+  }
+}
