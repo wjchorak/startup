@@ -14,7 +14,7 @@ const Navbar = () => {
         <menu className="navbar-nav">
             <li className="nav-item"><NavLink className="nav-link" to="play">Play</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link active" to="about">About</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link" to="index">Logout</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/">Logout</NavLink></li>
         </menu>
     );
 };
@@ -33,7 +33,12 @@ export default function App() {
                     {showNavbar && <Navbar />}
                 </header>
 
-                <main>App components go here</main>
+                <Routes>
+                    <Route path='/' element={<Login />} exact />
+                    <Route path='/play' element={<Play />} />
+                    <Route path='/about' element={<About />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
 
                 <footer>
                     <br />
@@ -43,4 +48,8 @@ export default function App() {
                 </footer>
             </div>
     );
+}
+
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
