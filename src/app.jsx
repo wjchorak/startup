@@ -24,7 +24,6 @@ export default function App() {
     const showNavbar = NAVBAR_ROUTES.includes(location.pathname);
 
     return (
-        <BrowserRouter>
             <div className="body">
                 <header id="page-header">
                     <nav className="navbar fixed-top navbar-dark">
@@ -43,6 +42,5 @@ export default function App() {
                     <a href="https://github.com/wjchorak/startup">Github</a>
                 </footer>
             </div>
-        </BrowserRouter>
     );
 }
