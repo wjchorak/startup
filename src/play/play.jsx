@@ -1,11 +1,11 @@
 import React from 'react';
-import './play.css';
+import styles from './play.module.css';
 
 export function Play() {
     return (
-        <main>
-            <div id="leaderboard">
-                <table>
+        <main className={styles.main}>
+            <div className={styles.leaderboard}>
+                <table className={styles.table}>
                     <thead>
                         <tr>
                             <td><span>Rank</span></td>
@@ -32,19 +32,21 @@ export function Play() {
                     </tbody>
                 </table>
 
-                <div id="current-credits">
-                    <span id="player-credits">Current Credits: $0</span>
+                <div className={styles.currentCredits}>
+                    <span className={styles.playerCredits} id="player-credits">
+                        Current Credits: $0
+                    </span>
                 </div>
             </div>
             
-            <div id="game">
-                <div className="card-container" id="dealer-cards">
-                    <div className="playing-card">K</div>
+            <div className={styles.game}>
+                <div className={styles.cardContainer} id="dealer-cards">
+                    <div className={styles.playingCard}>K</div>
                 </div>
 
-                <div className="card-container" id="player-cards">
-                    <div className="playing-card">7</div>
-                    <div className="playing-card">10</div>
+                <div className={styles.cardContainer} id="player-cards">
+                    <div className={styles.playingCard}>7</div>
+                    <div className={styles.playingCard}>10</div>
                 </div>
 
                 <div id="controls">
@@ -62,7 +64,7 @@ export function Play() {
                 </div>
             </div>
             
-            <div id="game-state">
+            <div className={styles.gameState} id="game-state">
                 <div id="current-turn">Your Turn...</div>
                 <div id="bet">Bet: $30</div>
             </div>
