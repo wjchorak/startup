@@ -12,8 +12,8 @@ const NAVBAR_ROUTES = ['/play', '/about'];
 const Navbar = () => {
     return (
         <menu className="navbar-nav">
-            <li className="nav-item"><NavLink className="nav-link" to="play">Play</NavLink></li>
-            <li className="nav-item"><NavLink className="nav-link active" to="about">About</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link" to="/play">Play</NavLink></li>
+            <li className="nav-item"><NavLink className="nav-link active" to="/about">About</NavLink></li>
             <li className="nav-item"><NavLink className="nav-link" to="/">Logout</NavLink></li>
         </menu>
     );

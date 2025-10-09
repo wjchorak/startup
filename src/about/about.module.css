@@ -1,26 +1,39 @@
-main {
+.main {
+    flex-direction: column !important;
     justify-content: flex-start;
     row-gap: 2px;
     overflow: scroll;
 }
 
+.memes {
+    display: flex;
+    gap: 10px;
+}
+
+.disclaimer {
+    margin-top: 20px;
+}
+
 @media (max-height: 600px) {
-    header {
+    .header {
         display: none;
     }
-    footer {
+
+    .footer {
         display: none;
     }
-    main {
+
+    .main {
         flex: 1 100vh;
     }
 }
 
 @media (max-width: 1000px) {
-    main {
+    .main {
         margin: 5px;
     }
-    #disclaimer {
-        margin-bottom: 30vh;
+
+    .disclaimer {
+        margin-bottom: 30px;
     }
 }

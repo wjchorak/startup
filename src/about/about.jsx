@@ -1,17 +1,17 @@
 import React from 'react';
-import './about.css';
+import styles from './about.module.css';
 
 export function About() {
     return (
-        <main>
+        <main className={styles.main}>
             <br />
             <h1>How to Play</h1>
 
-            <div id="rules">
+            <div>
                 <p>
                     Blackjack is a card game played with a standard deck of 52 cards. The goal is to have a hand value as close to 21 as possible without exceeding it. Cards 2 through 10 are worth their face value, face cards (Jack, Queen, King) are worth 10 points, and Aces can be worth either 1 or 11, depending on what benefits the hand most.
                 </p>
-            
+
                 <p>
                     You are dealt two cards, face-up, while the dealer gets one face-up and one face-down card. You can choose to "hit" (draw another card) or "stand" (keep your hand as is). You may continue to hit until you are satisfied with your hand or exceed 21, at which point you "bust" and lose automatically. You may also choose to double down, in which case you will draw only one more card before standing and double your bet.
                 </p>
@@ -23,21 +23,29 @@ export function About() {
 
             <hr />
 
-            <div id="joke">
+            <div>
                 Time flies like an arrow. Fruit flies like a banana.
             </div>
 
             <hr />
 
-            <div id="memes" style="display: flex">
-                <img width="200px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages7.memedroid.com%2Fimages%2FUPLOADED759%2F650232a714ff3.jpeg&f=1&nofb=1&ipt=31e0307e83f4ed2e94a12491698c7d9036b8ecd175b99f4cbc909c8f567bc037" alt="When gambling, you can win 2000% of your money, but you can only lose 100%. Do the math." />
+            <div className={styles.memes}>
+                <img
+                    width="200px"
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages7.memedroid.com%2Fimages%2FUPLOADED759%2F650232a714ff3.jpeg&f=1&nofb=1&ipt=31e0307e83f4ed2e94a12491698c7d9036b8ecd175b99f4cbc909c8f567bc037"
+                    alt="When gambling, you can win 2000% of your money, but you can only lose 100%. Do the math."
+                />
 
-                <img width="200px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fphotos%2Fimages%2Ffacebook%2F002%2F508%2F127%2Fb63.jpg&f=1&nofb=1&ipt=23c43efe32412e84a258fdf1821afa9f6a3dc96c36a3ef4ccfb5cce2a068ef3c" alt="Fact: 90% of gamblers quit right before they're about to hit it big" />
+                <img
+                    width="200px"
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fphotos%2Fimages%2Ffacebook%2F002%2F508%2F127%2Fb63.jpg&f=1&nofb=1&ipt=23c43efe32412e84a258fdf1821afa9f6a3dc96c36a3ef4ccfb5cce2a068ef3c"
+                    alt="Fact: 90% of gamblers quit right before they're about to hit it big"
+                />
             </div>
 
             <hr />
 
-            <div id="disclaimer">
+            <div className={styles.disclaimer}>
                 <p>
                     Disclaimer: Generally, gambling is an addictive activity that can lead to financial and spiritual ruin. This site is intended to offer some of the fun associated with blackjack while avoiding the less savory parts of the experience.
                 </p>
