@@ -106,7 +106,7 @@ tr:last-child td {
         align-self: center;
     }
 
-    #game-state {
+    .gameStateS {
         margin-bottom: 30vh;
         align-self: center;
     }

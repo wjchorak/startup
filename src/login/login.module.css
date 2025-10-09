@@ -1,29 +1,35 @@
-main {
+.main {
+    display: flex;
     flex-direction: row;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
-#login-page {
+.loginPage {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-self: flex-start;
     height: 70%;
+    max-width: 400px;
+    width: 100%;
 }
 
-#login-controls {
+.loginControls {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.button-outline {
+.buttonOutline {
     display: inline-flex;
     height: 30px;
     justify-content: center;
     margin: 10px;
 }
 
-input {
+.loginEnter {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #dce1de;
@@ -35,7 +41,7 @@ input {
 }
 
 @media (max-width: 1000px) {
-    body {
+    :global(body) {
         overflow: scroll;
     }
 }
