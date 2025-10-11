@@ -50,6 +50,7 @@ function drawCard(deck, setDeck, setHand) {
 export function Play() {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
+    const [playerHand, setPlayerHand] = useState([]);
 
     return (
         <main className={styles.main}>
@@ -106,13 +107,24 @@ export function Play() {
                 </div>
 
                 <div className={styles.cardContainer} id="player-cards">
-                    <div className={styles.playingCard}>7</div>
-                    <div className={styles.playingCard}>10</div>
+                    {playerHand.map((card, index) => (
+                        <div key={index} className={styles.playingCard}>
+                            <div className={styles.cornerTop}>
+                                {card.display} {card.suit}
+                            </div>
+                            <div className={styles.centerValue}>
+                                {card.display === 'A' ? card.suit : card.display}
+                            </div>
+                            <div className={styles.cornerBottom}>
+                                {card.display} {card.suit}
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
                 <div id="controls">
                     <div id="card-controls">
-                        <button className="button-outline" onClick={() => drawCard(deck, setDeck, setDealerHand)}>Hit</button>
+                        <button className="button-outline" onClick={() => drawCard(deck, setDeck, setPlayerHand)}>Hit</button>
                         <button className="button-outline">Stand</button>
                         <button className="button-outline">x2</button>
                     </div>
