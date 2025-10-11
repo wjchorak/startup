@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './play.module.css';
 
-const suits = [0, 1, 2, 3];
+const suits = ['H', 'S', 'C', 'D'];
 const values = [
     { value: 11,  display: 'A' },
     { value: 2,  display: '2' },
@@ -34,18 +34,23 @@ function getNewDeck() {
     return deck;
 }
 
-function drawCard(deck, hand) {
+function drawCard(deck, setDeck, setHand) {
     if (deck.length === 0) {
         console.log("Error: out of cards :(");
         return null;
     }
 
-    let card = deck.pop();
-    hand.push(card);
-    return card;
+    let newDeck = [...deck];
+    let card = newDeck.pop();
+
+    setDeck(newDeck);
+    setHand(hand => [...hand, card]);
 }
 
 export function Play() {
+    const [deck, setDeck] = useState(() => getNewDeck());
+    const [dealerHand, setDealerHand] = useState([]);
+
     return (
         <main className={styles.main}>
             <div className={styles.leaderboard}>
@@ -85,7 +90,11 @@ export function Play() {
             
             <div className={styles.game}>
                 <div className={styles.cardContainer} id="dealer-cards">
-                    <div className={styles.playingCard}>K</div>
+                    {dealerHand.map((card, index) => (
+                        <div key={index} className={styles.playingCard}>
+                            {card.display} of {card.suit}
+                        </div>
+                    ))}
                 </div>
 
                 <div className={styles.cardContainer} id="player-cards">
@@ -95,7 +104,7 @@ export function Play() {
 
                 <div id="controls">
                     <div id="card-controls">
-                        <button className="button-outline">Hit</button>
+                        <button className="button-outline" onClick={() => drawCard(deck, setDeck, setDealerHand)}>Hit</button>
                         <button className="button-outline">Stand</button>
                         <button className="button-outline">x2</button>
                     </div>
