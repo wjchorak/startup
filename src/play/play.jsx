@@ -99,24 +99,7 @@ export function Play() {
             
             <div className={styles.game}>
                 <div className={styles.cardContainer} id="dealer-cards">
-                    {dealerHand.map((card, index) => (
-                        <div key={index} className={styles.playingCard}>
-                            <div className={styles.cornerTop}>
-                                {card.display} {card.suit}
-                            </div>
-                            <div className={styles.centerValue}>
-                                {card.display === 'A' ? card.suit : card.display}
-                            </div>
-                            <div className={styles.cornerBottom}>
-                                {card.display} {card.suit}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className={styles.cardContainer} id="player-cards">
-                    {playerHand.map((card, index) => {
-                        console.log('🧱 Rendering card:', card.display, card.suit, 'isNew:', card.isNew);
+                    {dealerHand.map((card, index) => {
                         const cardClasses = `${styles.playingCard} ${card.isNew ? styles.dealingCard : ''}`;
 
                         return (
@@ -134,6 +117,30 @@ export function Play() {
                         );
                     })}
                 </div>
+
+                <div className='styles.dealer-score'>Dealer Score: </div>
+
+                <div className={styles.cardContainer} id="player-cards">
+                    {playerHand.map((card, index) => {
+                        const cardClasses = `${styles.playingCard} ${card.isNew ? styles.dealingCard : ''}`;
+
+                        return (
+                            <div key={card.id} className={cardClasses}>
+                                <div className={styles.cornerTop}>
+                                    {card.display} {card.suit}
+                                </div>
+                                <div className={styles.centerValue}>
+                                    {card.display === 'A' ? card.suit : card.display}
+                                </div>
+                                <div className={styles.cornerBottom}>
+                                    {card.display} {card.suit}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <div className='styles.player-score'>Player Score: </div>
 
                 <div id="controls">
                     <div id="card-controls">
