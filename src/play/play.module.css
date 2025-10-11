@@ -59,6 +59,35 @@
     margin: 5px;
     font-size: 2rem;
     font-weight: bold;
+    position: relative;
+}
+
+.cornerTop, .cornerBottom {
+    position: absolute;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1rem;
+}
+
+.cornerTop {
+    top: 5px;
+    left: 5px;
+}
+
+.cornerBottom {
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg);
+}
+
+.centerValue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
 }
 
 .table {

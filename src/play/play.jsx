@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './play.module.css';
 
-const suits = ['H', 'S', 'C', 'D'];
+const suits = ['♥', '♠', '♣', '♦'];
 const values = [
     { value: 11,  display: 'A' },
     { value: 2,  display: '2' },
@@ -92,7 +92,15 @@ export function Play() {
                 <div className={styles.cardContainer} id="dealer-cards">
                     {dealerHand.map((card, index) => (
                         <div key={index} className={styles.playingCard}>
-                            {card.display} of {card.suit}
+                            <div className={styles.cornerTop}>
+                                {card.display} {card.suit}
+                            </div>
+                            <div className={styles.centerValue}>
+                                {card.display === 'A' ? card.suit : card.display}
+                            </div>
+                            <div className={styles.cornerBottom}>
+                                {card.display} {card.suit}
+                            </div>
                         </div>
                     ))}
                 </div>
