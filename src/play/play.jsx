@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './play.module.css';
 
 const suits = ['♥', '♠', '♣', '♦'];
@@ -20,8 +20,8 @@ const values = [
 
 function getNewDeck() {
     let deck = [];
-    for (const suit of suits) {
-        for (const {value, display}  of values) {
+    for (let suit of suits) {
+        for (let {value, display}  of values) {
             deck.push({id: `${display}${suit}`, value, display, suit});
         }
     }
@@ -55,10 +55,45 @@ function drawCard(deck, setDeck, setHand) {
     }, 500);
 }
 
+function calculateScore(hand) {
+    let aceCount = 0;
+    let score = 0;
+
+    for (let card of hand) {
+        score += card.value;
+        console.log("Card:", card.display, card.suit, "Value:", card.value);
+        if (card.value === 11) aceCount += 1;
+
+        if(score > 21 && aceCount > 0) {
+            score -= 10;
+            aceCount--;
+        }
+    }
+
+    return score;
+}
+
+function hit(deck, setDeck, setHand) {
+    drawCard(deck, setDeck, setHand);
+}
+
 export function Play() {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
+    const [dealerScore, setDealerScore] = useState([]);
     const [playerHand, setPlayerHand] = useState([]);
+    const [playerScore, setPlayerScore] = useState([]);
+    const [gameState, setGameState] = useState(1);
+
+    useEffect(() => {
+        let currentScore = calculateScore(playerHand);
+        setPlayerScore(currentScore);
+
+        if (currentScore > 20) {
+            currentScore === 21 ? setPlayerScore("Blackjack!") : setPlayerScore("Bust!");
+            setGameState(2);
+        }
+    }, [playerHand]);
 
     return (
         <main className={styles.main}>
@@ -118,7 +153,7 @@ export function Play() {
                     })}
                 </div>
 
-                <div className='styles.dealer-score'>Dealer Score: </div>
+                <div className='styles.dealer-score'>Dealer Score: {dealerScore}</div>
 
                 <div className={styles.cardContainer} id="player-cards">
                     {playerHand.map((card, index) => {
@@ -140,20 +175,22 @@ export function Play() {
                     })}
                 </div>
 
-                <div className='styles.player-score'>Player Score: </div>
+                <div className='styles.player-score'>Player Score: {playerScore}</div>
 
                 <div id="controls">
-                    <div id="card-controls">
-                        <button className="button-outline" onClick={() => drawCard(deck, setDeck, setPlayerHand)}>Hit</button>
-                        <button className="button-outline">Stand</button>
-                        <button className="button-outline">x2</button>
-                    </div>
-            
-                    <div id="bet-controls">
-                        <button className="button-outline">+</button>
-                        <button className="button-outline">-</button>
-                        <button className="button-outline">Deal</button>
-                    </div>
+                    {gameState === 1 ? (
+                        <div id="card-controls">
+                            <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
+                            <button className="button-outline">Stand</button>
+                            <button className="button-outline">x2</button>
+                        </div>
+                    ) : (
+                        <div id="bet-controls">
+                            <button className="button-outline">+</button>
+                            <button className="button-outline">-</button>
+                            <button className="button-outline">Deal</button>
+                        </div>
+                    )}
                 </div>
             </div>
             
