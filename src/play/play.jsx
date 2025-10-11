@@ -77,6 +77,11 @@ function hit(deck, setDeck, setHand) {
     drawCard(deck, setDeck, setHand);
 }
 
+function doubleDown(deck, setDeck, setHand, setGameState) {
+    drawCard(deck, setDeck, setHand);
+    setGameState(2);
+}
+
 export function Play() {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
@@ -178,19 +183,26 @@ export function Play() {
                 <div className='styles.player-score'>Player Score: {playerScore}</div>
 
                 <div id="controls">
-                    {gameState === 1 ? (
-                        <div id="card-controls">
-                            <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
-                            <button className="button-outline">Stand</button>
-                            <button className="button-outline">x2</button>
-                        </div>
-                    ) : (
-                        <div id="bet-controls">
-                            <button className="button-outline">+</button>
-                            <button className="button-outline">-</button>
-                            <button className="button-outline">Deal</button>
-                        </div>
-                    )}
+                    {(() => {
+                        switch (gameState) {
+                            case 1:
+                                <div id="game-controls">
+                                    <button className="button-outline">Start</button>
+                                </div>
+                            case 2:
+                            <div id="bet-controls">
+                                <button className="button-outline">+</button>
+                                <button className="button-outline">-</button>
+                                <button className="button-outline">Deal</button>
+                            </div>
+                            case 3:
+                            <div id="card-controls">
+                                <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
+                                <button className="button-outline" onClick={() => setGameState(2)}>Stand</button>
+                                <button className="button-outline" onClick={() => doubleDown(deck, setDeck, setPlayerHand, setGameState)}>x2</button>
+                            </div>
+                        }
+                    })()}
                 </div>
             </div>
             
