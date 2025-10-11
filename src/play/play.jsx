@@ -190,17 +190,17 @@ export function Play() {
                                     <button className="button-outline">Start</button>
                                 </div>
                             case 2:
-                            <div id="bet-controls">
-                                <button className="button-outline">+</button>
-                                <button className="button-outline">-</button>
-                                <button className="button-outline">Deal</button>
-                            </div>
+                                <div id="bet-controls">
+                                    <button className="button-outline">+</button>
+                                    <button className="button-outline">-</button>
+                                    <button className="button-outline">Deal</button>
+                                </div>
                             case 3:
-                            <div id="card-controls">
-                                <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
-                                <button className="button-outline" onClick={() => setGameState(2)}>Stand</button>
-                                <button className="button-outline" onClick={() => doubleDown(deck, setDeck, setPlayerHand, setGameState)}>x2</button>
-                            </div>
+                                <div id="card-controls">
+                                    <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
+                                    <button className="button-outline" onClick={() => setGameState(2)}>Stand</button>
+                                    <button className="button-outline" onClick={() => doubleDown(deck, setDeck, setPlayerHand, setGameState)}>x2</button>
+                                </div>
                         }
                     })()}
                 </div>
