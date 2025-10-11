@@ -46,6 +46,21 @@
     height: 130px;
 }
 
+@keyframes deal {
+    0%  {
+        transform: translateY(-37.5vh) scale(0.75);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.dealingCard {
+    animation: deal 0.5s ease-out forwards;
+}
+
 .playingCard {
     height: 120px;
     width: 80px;
@@ -60,6 +75,7 @@
     font-size: 2rem;
     font-weight: bold;
     position: relative;
+    transition: transform 0.3s ease;
 }
 
 .cornerTop, .cornerBottom {

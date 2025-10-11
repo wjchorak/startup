@@ -22,7 +22,7 @@ function getNewDeck() {
     let deck = [];
     for (const suit of suits) {
         for (const {value, display}  of values) {
-            deck.push({value, display, suit});
+            deck.push({id: `${display}${suit}`, value, display, suit});
         }
     }
 
@@ -43,8 +43,16 @@ function drawCard(deck, setDeck, setHand) {
     let newDeck = [...deck];
     let card = newDeck.pop();
 
+    let animatedCard = {...card, isNew: true};
+
     setDeck(newDeck);
-    setHand(hand => [...hand, card]);
+    setHand(hand => [...hand, animatedCard]);
+
+    setTimeout(() => {
+        setHand(prev =>
+            prev.map(c => (c.id === animatedCard.id ? { ...c, isNew: false } : c))
+        );
+    }, 500);
 }
 
 export function Play() {
@@ -107,19 +115,24 @@ export function Play() {
                 </div>
 
                 <div className={styles.cardContainer} id="player-cards">
-                    {playerHand.map((card, index) => (
-                        <div key={index} className={styles.playingCard}>
-                            <div className={styles.cornerTop}>
-                                {card.display} {card.suit}
+                    {playerHand.map((card, index) => {
+                        console.log('🧱 Rendering card:', card.display, card.suit, 'isNew:', card.isNew);
+                        const cardClasses = `${styles.playingCard} ${card.isNew ? styles.dealingCard : ''}`;
+
+                        return (
+                            <div key={card.id} className={cardClasses}>
+                                <div className={styles.cornerTop}>
+                                    {card.display} {card.suit}
+                                </div>
+                                <div className={styles.centerValue}>
+                                    {card.display === 'A' ? card.suit : card.display}
+                                </div>
+                                <div className={styles.cornerBottom}>
+                                    {card.display} {card.suit}
+                                </div>
                             </div>
-                            <div className={styles.centerValue}>
-                                {card.display === 'A' ? card.suit : card.display}
-                            </div>
-                            <div className={styles.cornerBottom}>
-                                {card.display} {card.suit}
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 <div id="controls">
