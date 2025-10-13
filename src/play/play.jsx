@@ -70,7 +70,7 @@ function calculateScore(hand) {
         console.log("Card:", card.display, card.suit, "Value:", card.value);
         if (card.value === 11) aceCount += 1;
 
-        if(score > 21 && aceCount > 0) {
+        if (score > 21 && aceCount > 0) {
             score -= 10;
             aceCount--;
         }
@@ -98,26 +98,88 @@ export function Play() {
     const [stateText, setStateText] = useState();
     const [lastWinner, setLastWinner] = useState("");
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const dealerTurn = async () => {
+        let currentScore;
+        let currentPlayerScore = calculateScore(playerHand);
+        let currentDealerHand = [...dealerHand];
+
+        while (true) {
+            currentScore = calculateScore(currentDealerHand);
+
+            if (currentScore > 21 && currentPlayerScore <= 21) {
+                setLastWinner("Dealer Busts, Player Wins!");
+                setGameState(1);
+                return;
+            } else if (currentScore === 21 && currentPlayerScore === 21) {
+                setLastWinner("Push. Bet Returned.");
+                setGameState(1);
+                return;
+            } else if (currentScore === 21) {
+                setLastWinner("Dealer Wins.");
+                setGameState(1);
+                return;
+            }
+
+            if (currentScore >= 17) {
+                if (currentScore === currentPlayerScore) {
+                    setLastWinner("Push. Bet Returned.");
+                } else if (currentScore > currentPlayerScore) {
+                    setLastWinner("Dealer Wins.");
+                } else {
+                    setLastWinner("Player Wins!");
+                }
+                setGameState(1);
+                return;
+            }
+
+            await delay(1000);
+            hit(deck, setDeck, setDealerHand);
+            currentDealerHand = [...dealerHand];
+        }
+    };
+
+
     useEffect(() => {
         let currentScore = calculateScore(playerHand);
         setPlayerScore(currentScore);
 
         if (currentScore > 20) {
-            currentScore === 21 ? setPlayerScore("Blackjack!") : setPlayerScore("Bust!");
+            if (playerHand.length === 2 && currentScore === 21) {
+                setPlayerScore("Blackjack!");
+            }
+            if (currentScore > 21) {
+                setPlayerScore("Bust!");
+            }
             setGameState(4);
         }
     }, [playerHand]);
 
     useEffect(() => {
+        let currentScore = calculateScore(dealerHand);
+        setDealerScore(currentScore);
+
+        if (currentScore > 20) {
+            if (dealerHand.length === 2 && currentScore === 21) {
+                setDealerScore("Blackjack!");
+            }
+            if (currentScore > 21) {
+                setDealerScore("Bust!");
+            }
+        }
+    }, [dealerHand]);
+
+    useEffect(() => {
         switch (gameState) {
             case 1:
                 if (lastWinner === "") {
-                    setStateText("New Game");
                 } else {
-                    setStateText(lastWinner + " won!")
+                    setStateText(lastWinner)
                 }
                 break;
             case 2:
+                setDeck(() => getNewDeck());
                 setDealerHand([]);
                 setPlayerHand([]);
                 setStateText("Make a bet...");
@@ -125,12 +187,13 @@ export function Play() {
             case 3:
                 hit(deck, setDeck, setPlayerHand);
                 hit(deck, setDeck, setPlayerHand);
+                hit(deck, setDeck, setDealerHand);
                 
                 setStateText("Your turn...");
                 break;
             case 4:
                 setStateText("Dealer turn...");
-                setLastWinner("Dealer");
+                dealerTurn();
                 setGameState(1);
                 break;
             default:
