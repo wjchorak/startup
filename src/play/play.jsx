@@ -96,7 +96,6 @@ export function Play() {
     const [playerScore, setPlayerScore] = useState([]);
     const [gameState, setGameState] = useState(1);
     const [stateText, setStateText] = useState();
-    const [lastWinner, setLastWinner] = useState("");
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -106,6 +105,9 @@ export function Play() {
         let currentPlayerScore = calculateScore(playerHand);
 
         while (true) {
+            currentDealerHand = currentDealerHand.map(c => ({ ...c, isNew: false }));
+            await delay(50);
+
             let currentScore = calculateScore(currentDealerHand);
 
             console.log("Current Score: " + currentScore);
@@ -140,20 +142,18 @@ export function Play() {
                 return;
             }
 
-            await delay(1000);
+            await delay(1500);
 
-            let card = currentDeck.pop();
-            let animatedCard = { ...card, isNew: true };
+            const card = currentDeck.pop();
+            const animatedCard = { ...card, isNew: true };
 
-            currentDealerHand.push(animatedCard);
+            currentDealerHand = [...currentDealerHand, animatedCard];
             setDeck(currentDeck);
-            setDealerHand([...currentDealerHand]);
+            setDealerHand(prev => [...prev, animatedCard]);
 
-            setTimeout(() => {
-                setDealerHand(prev =>
-                    prev.map(c => (c.id === animatedCard.id ? { ...c, isNew: false } : c))
-                );
-            }, 500);
+            console.log(currentDealerHand);
+
+            await delay(500);
         }
     };
 
