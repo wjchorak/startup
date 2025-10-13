@@ -40,13 +40,18 @@ function drawCard(deck, setDeck, setHand) {
         return null;
     }
 
-    let newDeck = [...deck];
-    let card = newDeck.pop();
+    let animatedCard;
 
-    let animatedCard = {...card, isNew: true};
+    setDeck(prevDeck => {
+        let newDeck = [...prevDeck];
+        let card = newDeck.pop();
 
-    setDeck(newDeck);
-    setHand(hand => [...hand, animatedCard]);
+        animatedCard = { ...card, isNew: true };
+
+        setHand(prevHand => [...prevHand, animatedCard]);
+
+        return newDeck;
+    });
 
     setTimeout(() => {
         setHand(prev =>
@@ -54,6 +59,7 @@ function drawCard(deck, setDeck, setHand) {
         );
     }, 500);
 }
+
 
 function calculateScore(hand) {
     let aceCount = 0;
@@ -79,7 +85,7 @@ function hit(deck, setDeck, setHand) {
 
 function doubleDown(deck, setDeck, setHand, setGameState) {
     drawCard(deck, setDeck, setHand);
-    setGameState(1);
+    setGameState(4);
 }
 
 export function Play() {
@@ -89,6 +95,8 @@ export function Play() {
     const [playerHand, setPlayerHand] = useState([]);
     const [playerScore, setPlayerScore] = useState([]);
     const [gameState, setGameState] = useState(1);
+    const [stateText, setStateText] = useState();
+    const [lastWinner, setLastWinner] = useState("");
 
     useEffect(() => {
         let currentScore = calculateScore(playerHand);
@@ -96,9 +104,39 @@ export function Play() {
 
         if (currentScore > 20) {
             currentScore === 21 ? setPlayerScore("Blackjack!") : setPlayerScore("Bust!");
-            setGameState(1);
+            setGameState(4);
         }
     }, [playerHand]);
+
+    useEffect(() => {
+        switch (gameState) {
+            case 1:
+                if (lastWinner === "") {
+                    setStateText("New Game");
+                } else {
+                    setStateText(lastWinner + " won!")
+                }
+                break;
+            case 2:
+                setDealerHand([]);
+                setPlayerHand([]);
+                setStateText("Make a bet...");
+                break;
+            case 3:
+                hit(deck, setDeck, setPlayerHand);
+                hit(deck, setDeck, setPlayerHand);
+                
+                setStateText("Your turn...");
+                break;
+            case 4:
+                setStateText("Dealer turn...");
+                setLastWinner("Dealer");
+                setGameState(1);
+                break;
+            default:
+                console.log("Error: incorrect gameState ", gameState);
+        }
+    }, [gameState]);
 
     return (
         <main className={styles.main}>
@@ -198,7 +236,7 @@ export function Play() {
                             case 3:
                                 return <div id="card-controls">
                                     <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
-                                    <button className="button-outline" onClick={() => setGameState(1)}>Stand</button>
+                                    <button className="button-outline" onClick={() => setGameState(4)}>Stand</button>
                                     <button className="button-outline" onClick={() => doubleDown(deck, setDeck, setPlayerHand, setGameState)}>x2</button>
                                 </div>;
                             default:
@@ -209,7 +247,7 @@ export function Play() {
             </div>
             
             <div className={styles.gameState} id="game-state">
-                <div id="current-turn">Your Turn...</div>
+                <div id="current-turn">{stateText}</div>
                 <div id="bet">Bet: $30</div>
             </div>
         </main>
