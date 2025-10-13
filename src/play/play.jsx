@@ -101,45 +101,61 @@ export function Play() {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     const dealerTurn = async () => {
-        let currentScore;
-        let currentPlayerScore = calculateScore(playerHand);
         let currentDealerHand = [...dealerHand];
+        let currentDeck = [...deck];
+        let currentPlayerScore = calculateScore(playerHand);
 
         while (true) {
-            currentScore = calculateScore(currentDealerHand);
+            let currentScore = calculateScore(currentDealerHand);
+
+            console.log("Current Score: " + currentScore);
 
             if (currentScore > 21 && currentPlayerScore <= 21) {
-                setLastWinner("Dealer Busts, Player Wins!");
+                setStateText("Dealer Busts, Player Wins!");
+                setDealerHand(currentDealerHand);
                 setGameState(1);
                 return;
             } else if (currentScore === 21 && currentPlayerScore === 21) {
-                setLastWinner("Push. Bet Returned.");
+                setStateText("Push. Bet Returned.");
+                setDealerHand(currentDealerHand);
                 setGameState(1);
                 return;
             } else if (currentScore === 21) {
-                setLastWinner("Dealer Wins.");
+                setStateText("Dealer Wins.");
+                setDealerHand(currentDealerHand);
                 setGameState(1);
                 return;
             }
 
             if (currentScore >= 17) {
                 if (currentScore === currentPlayerScore) {
-                    setLastWinner("Push. Bet Returned.");
+                    setStateText("Push. Bet Returned.");
                 } else if (currentScore > currentPlayerScore) {
-                    setLastWinner("Dealer Wins.");
+                    setStateText("Dealer Wins.");
                 } else {
-                    setLastWinner("Player Wins!");
+                    setStateText("Player Wins!");
                 }
+                setDealerHand(currentDealerHand);
                 setGameState(1);
                 return;
             }
 
             await delay(1000);
-            hit(deck, setDeck, setDealerHand);
-            currentDealerHand = [...dealerHand];
+
+            let card = currentDeck.pop();
+            let animatedCard = { ...card, isNew: true };
+
+            currentDealerHand.push(animatedCard);
+            setDeck(currentDeck);
+            setDealerHand([...currentDealerHand]);
+
+            setTimeout(() => {
+                setDealerHand(prev =>
+                    prev.map(c => (c.id === animatedCard.id ? { ...c, isNew: false } : c))
+                );
+            }, 500);
         }
     };
-
 
     useEffect(() => {
         let currentScore = calculateScore(playerHand);
@@ -173,10 +189,6 @@ export function Play() {
     useEffect(() => {
         switch (gameState) {
             case 1:
-                if (lastWinner === "") {
-                } else {
-                    setStateText(lastWinner)
-                }
                 break;
             case 2:
                 setDeck(() => getNewDeck());
