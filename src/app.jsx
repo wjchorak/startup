@@ -6,6 +6,7 @@ import { BrowserRouter, NavLink, Route, Routes, useLocation } from 'react-router
 import { Login } from './login/login';
 import { Play } from './play/play';
 import { About } from './about/about';
+import { AuthState } from './login/authState';
 
 const NAVBAR_ROUTES = ['/play', '/about'];
 
@@ -23,6 +24,10 @@ export default function App() {
     const location = useLocation();
     const showNavbar = NAVBAR_ROUTES.includes(location.pathname);
 
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
     return (
             <div className="body">
                 <header id="page-header">
@@ -34,7 +39,15 @@ export default function App() {
                 </header>
 
                 <Routes>
-                    <Route path='/' element={<Login />} exact />
+                    <Route path='/' element={
+                        <Login
+                            userName={userName}
+                            authState={authState}
+                            onAuthChange={(userName, authState) => {
+                                setAuthState(authState);
+                                setUserName(userName);
+                            }}
+                        />} exact />
                     <Route path='/play' element={<Play />} />
                     <Route path='/about' element={<About />} />
                     <Route path='*' element={<NotFound />} />

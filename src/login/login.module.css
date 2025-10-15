@@ -40,6 +40,11 @@
     width: 100%;
 }
 
+.loginEnter:focus {
+    background-color: #1F2421;
+    color: #dce1de;
+}
+
 @media (max-width: 1000px) {
     :global(body) {
         overflow: scroll;

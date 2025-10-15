@@ -300,7 +300,7 @@ export function Play() {
                         switch (gameState) {
                             case 1:
                                 return <div id="game-controls">
-                                    <button className="button-outline" onClick={() => setGameState(2)}>Start</button>
+                                    <button className="button-outline" onClick={() => setGameState(2)}>New Game</button>
                                 </div>;
                             case 2:
                                 return <div id="bet-controls">
@@ -314,6 +314,8 @@ export function Play() {
                                     <button className="button-outline" onClick={() => setGameState(4)}>Stand</button>
                                     <button className="button-outline" onClick={() => doubleDown(deck, setDeck, setPlayerHand, setGameState)}>x2</button>
                                 </div>;
+                            case 4:
+                                return <div id="gameControls"></div>;
                             default:
                                 return null;
                         }
