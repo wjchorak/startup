@@ -88,6 +88,17 @@ function doubleDown(deck, setDeck, setHand, setGameState) {
     setGameState(4);
 }
 
+function changeBet(bet, setBet, adding) {
+    let newBet = bet;
+    let max = 10;
+    adding ? newBet++ : newBet--;
+
+    if(newBet < 0) { newBet = 0; 
+    } else if(newBet > max) { newBet = max; }
+
+    setBet(newBet);
+}
+
 export function Play() {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
@@ -95,7 +106,9 @@ export function Play() {
     const [playerHand, setPlayerHand] = useState([]);
     const [playerScore, setPlayerScore] = useState([]);
     const [gameState, setGameState] = useState(1);
+    const [gameOver, setGameOver] = useState(true);
     const [stateText, setStateText] = useState();
+    const [bet, setBet] = useState(1);
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -116,16 +129,19 @@ export function Play() {
                 setStateText("Dealer Busts, Player Wins!");
                 setDealerHand(currentDealerHand);
                 setGameState(1);
+                setGameOver(true);
                 return;
             } else if (currentScore === 21 && currentPlayerScore === 21) {
                 setStateText("Push. Bet Returned.");
                 setDealerHand(currentDealerHand);
                 setGameState(1);
+                setGameOver(true);
                 return;
             } else if (currentScore === 21) {
                 setStateText("Dealer Wins.");
                 setDealerHand(currentDealerHand);
                 setGameState(1);
+                setGameOver(true);
                 return;
             }
 
@@ -139,6 +155,7 @@ export function Play() {
                 }
                 setDealerHand(currentDealerHand);
                 setGameState(1);
+                setGameOver(true);
                 return;
             }
 
@@ -300,12 +317,12 @@ export function Play() {
                         switch (gameState) {
                             case 1:
                                 return <div id="game-controls">
-                                    <button className="button-outline" onClick={() => setGameState(2)}>New Game</button>
+                                    {gameOver && (<button className="button-outline" onClick={() => { setGameState(2); setGameOver(false); }}>New Game</button>)}
                                 </div>;
                             case 2:
                                 return <div id="bet-controls">
-                                    <button className="button-outline">+</button>
-                                    <button className="button-outline">-</button>
+                                    <button className="button-outline" onClick={() => changeBet(bet, setBet, true)}>+</button>
+                                    <button className="button-outline" onClick={() => changeBet(bet, setBet, false)}>-</button>
                                     <button className="button-outline" onClick={() => setGameState(3)}>Deal</button>
                                 </div>;
                             case 3:
@@ -325,7 +342,7 @@ export function Play() {
             
             <div className={styles.gameState} id="game-state">
                 <div id="current-turn">{stateText}</div>
-                <div id="bet">Bet: $30</div>
+                <div id="bet">Bet: ${bet}</div>
             </div>
         </main>
     );
