@@ -16,6 +16,17 @@
     width: 100%;
 }
 
+h1 {
+    align-self: center;
+}
+
+.loggedIn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .loginControls {
     display: flex;
     flex-direction: row;

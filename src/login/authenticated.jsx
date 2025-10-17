@@ -13,13 +13,15 @@ export function Authenticated(props) {
 
     return (
         <div className={styles.loginPage}>
-            <div className='playerName'>{props.userName}</div>
-            <button className={styles.buttonOutline} onClick={() => navigate('/play')}>
-                Play
-            </button>
-            <button variant={styles.buttonOutline} onClick={() => logout()}>
-                Logout
-            </button>
+            <h1>Logged in as {props.userName}</h1>
+            <div className={styles.loggedIn}>
+                <button className={`button-outline ${styles.buttonOutline}`} onClick={() => navigate('/play')}>
+                    Play
+                </button>
+                <button className={`button-outline ${styles.buttonOutline}`} onClick={() => logout()}>
+                    Logout
+                </button>
+            </div>
         </div>
     );
 }
