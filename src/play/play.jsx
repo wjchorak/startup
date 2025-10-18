@@ -83,14 +83,17 @@ function hit(deck, setDeck, setHand) {
     drawCard(deck, setDeck, setHand);
 }
 
-function doubleDown(deck, setDeck, setHand, setGameState) {
-    drawCard(deck, setDeck, setHand);
-    setGameState(4);
+function doubleDown(credits, setCredits, bet, setBet, deck, setDeck, setHand, setGameState) {
+    if(credits >= bet) {
+        setCredits(credits - bet);
+        setBet(bet * 2);
+        drawCard(deck, setDeck, setHand);
+        setGameState(4);
+    }
 }
 
-function changeBet(bet, setBet, adding) {
+function changeBet(max, bet, setBet, adding) {
     let newBet = bet;
-    let max = 10;
     adding ? newBet++ : newBet--;
 
     if(newBet < 1) { newBet = 1; 
@@ -99,7 +102,7 @@ function changeBet(bet, setBet, adding) {
     setBet(newBet);
 }
 
-export function Play() {
+export function Play({ userName, credits, setCredits }) {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
     const [dealerScore, setDealerScore] = useState([]);
@@ -128,12 +131,21 @@ export function Play() {
             if (currentScore > 21 && currentPlayerScore <= 21) {
                 setStateText("Dealer Busts, Player Wins!");
                 setDealerHand(currentDealerHand);
+                setCredits(credits + (2 * bet));
+                setGameState(1);
+                setGameOver(true);
+                return;
+            } else if (currentScore > 21 && currentPlayerScore > 21) {
+                setStateText("Push. Bet Returned.");
+                setDealerHand(currentDealerHand);
+                setCredits(credits + (bet));
                 setGameState(1);
                 setGameOver(true);
                 return;
             } else if (currentScore === 21 && currentPlayerScore === 21) {
                 setStateText("Push. Bet Returned.");
                 setDealerHand(currentDealerHand);
+                setCredits(credits + (bet));
                 setGameState(1);
                 setGameOver(true);
                 return;
@@ -148,10 +160,12 @@ export function Play() {
             if (currentScore >= 17) {
                 if (currentScore === currentPlayerScore) {
                     setStateText("Push. Bet Returned.");
-                } else if (currentScore > currentPlayerScore) {
+                    setCredits(credits + (bet));
+                } else if ((currentScore > currentPlayerScore) || currentPlayerScore > 21) {
                     setStateText("Dealer Wins.");
                 } else {
                     setStateText("Player Wins!");
+                    setCredits(credits + (2 * bet));
                 }
                 setDealerHand(currentDealerHand);
                 setGameState(1);
@@ -212,12 +226,15 @@ export function Play() {
                 setDealerHand([]);
                 console.log(dealerHand);
                 setPlayerHand([]);
+                setBet(1);
                 setStateText("Make a bet...");
                 break;
             case 3:
                 hit(deck, setDeck, setPlayerHand);
                 hit(deck, setDeck, setPlayerHand);
                 hit(deck, setDeck, setDealerHand);
+
+                setCredits(credits - bet);
                 
                 setStateText("Your turn...");
                 break;
@@ -263,7 +280,7 @@ export function Play() {
 
                 <div className={styles.currentCredits}>
                     <span className={styles.playerCredits} id="player-credits">
-                        Current Credits: $0
+                        Current Credits: ${credits}
                     </span>
                 </div>
             </div>
@@ -322,15 +339,15 @@ export function Play() {
                                 </div>;
                             case 2:
                                 return <div id="bet-controls">
-                                    <button className="button-outline" onClick={() => changeBet(bet, setBet, true)}>+</button>
-                                    <button className="button-outline" onClick={() => changeBet(bet, setBet, false)}>-</button>
+                                    <button className="button-outline" onClick={() => changeBet(credits, bet, setBet, true)}>+</button>
+                                    <button className="button-outline" onClick={() => changeBet(credits, bet, setBet, false)}>-</button>
                                     <button className="button-outline" onClick={() => setGameState(3)}>Deal</button>
                                 </div>;
                             case 3:
                                 return <div id="card-controls">
                                     <button className="button-outline" onClick={() => hit(deck, setDeck, setPlayerHand)}>Hit</button>
                                     <button className="button-outline" onClick={() => setGameState(4)}>Stand</button>
-                                    <button className="button-outline" onClick={() => doubleDown(deck, setDeck, setPlayerHand, setGameState)}>x2</button>
+                                    <button className="button-outline" onClick={() => doubleDown(credits, setCredits, bet, setBet, deck, setDeck, setPlayerHand, setGameState)}>x2</button>
                                 </div>;
                             case 4:
                                 return <div id="gameControls"></div>;
@@ -343,7 +360,7 @@ export function Play() {
             
             <div className={styles.gameState} id="game-state">
                 <div id="current-turn">{stateText}</div>
-                <div id="bet">Bet: ${bet}</div>
+                {gameOver === false && (<div id="bet">Bet: ${bet}</div>)}
             </div>
         </main>
     );

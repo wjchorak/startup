@@ -8,6 +8,7 @@ export function Authenticated(props) {
 
     function logout() {
         localStorage.removeItem('userName');
+        localStorage.removeItem('credits');
         props.onLogout();
     }
 
