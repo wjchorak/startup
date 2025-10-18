@@ -93,7 +93,7 @@ function changeBet(bet, setBet, adding) {
     let max = 10;
     adding ? newBet++ : newBet--;
 
-    if(newBet < 0) { newBet = 0; 
+    if(newBet < 1) { newBet = 1; 
     } else if(newBet > max) { newBet = max; }
 
     setBet(newBet);
@@ -159,14 +159,14 @@ export function Play() {
                 return;
             }
 
-            await delay(1500);
+            await delay(1000);
 
             const card = currentDeck.pop();
             const animatedCard = { ...card, isNew: true };
 
             currentDealerHand = [...currentDealerHand, animatedCard];
-            setDeck(currentDeck);
-            setDealerHand(prev => [...prev, animatedCard]);
+            setDeck([...currentDeck]);
+            setDealerHand(currentDealerHand);
 
             console.log(currentDealerHand);
 
@@ -210,6 +210,7 @@ export function Play() {
             case 2:
                 setDeck(() => getNewDeck());
                 setDealerHand([]);
+                console.log(dealerHand);
                 setPlayerHand([]);
                 setStateText("Make a bet...");
                 break;
