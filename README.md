@@ -89,8 +89,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - The full game of blackjack is playable with bets, score leaderboard mockup, dealer logic, and animations. Login placeholder and API call placeholder on about page.
+- [x] **Hooks** - useEffect and useState are used throughout, especially for the game functionality, with scores, hands, leaderboard, and game states using those hooks.
 
 ## 🚀 Service deliverable
 
