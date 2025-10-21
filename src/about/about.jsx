@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './about.module.css';
 
 export function About() {
+    const [joke, setJoke] = useState('Loading...');
+
+    React.useEffect(() => {
+        setJoke("Time flies like an arrow. Fruit flies like a banana.");
+    });
+    
     return (
         <main className={styles.main}>
             <br />
@@ -24,7 +30,7 @@ export function About() {
             <hr />
 
             <div>
-                Time flies like an arrow. Fruit flies like a banana.
+                {joke}
             </div>
 
             <hr />
