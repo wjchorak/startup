@@ -79,6 +79,23 @@ function calculateScore(hand) {
     return score;
 }
 
+function updateLeaderboard(name, credits, setLeaderboard) {
+    console.log("Leaderboard updating " + name + " $" + credits + "...")
+    const existing = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    const filtered = existing.filter(entry => entry.name !== name);
+
+    const updated = [...filtered, { name, credits }]
+        .sort((a, b) => b.credits - a.credits)
+        .slice(0, 3);
+
+    localStorage.setItem("leaderboard", JSON.stringify(updated));
+    console.log("Saving leaderboard with", JSON.stringify(updated));
+
+    setLeaderboard(updated);
+}
+
+
 function hit(deck, setDeck, setHand) {
     drawCard(deck, setDeck, setHand);
 }
@@ -108,6 +125,7 @@ export function Play({ userName, credits, setCredits }) {
     const [dealerScore, setDealerScore] = useState([]);
     const [playerHand, setPlayerHand] = useState([]);
     const [playerScore, setPlayerScore] = useState([]);
+    const [leaderboard, setLeaderboard] = useState([]);
     const [gameState, setGameState] = useState(1);
     const [gameOver, setGameOver] = useState(true);
     const [stateText, setStateText] = useState();
@@ -133,6 +151,7 @@ export function Play({ userName, credits, setCredits }) {
                 setDealerHand(currentDealerHand);
                 setCredits(credits + (2 * bet));
                 setGameState(1);
+                updateLeaderboard(userName, credits + (2 * bet), setLeaderboard);
                 setGameOver(true);
                 return;
             } else if (currentScore > 21 && currentPlayerScore > 21) {
@@ -140,6 +159,7 @@ export function Play({ userName, credits, setCredits }) {
                 setDealerHand(currentDealerHand);
                 setCredits(credits + (bet));
                 setGameState(1);
+                updateLeaderboard(userName, credits + (bet), setLeaderboard);
                 setGameOver(true);
                 return;
             } else if (currentScore === 21 && currentPlayerScore === 21) {
@@ -147,12 +167,14 @@ export function Play({ userName, credits, setCredits }) {
                 setDealerHand(currentDealerHand);
                 setCredits(credits + (bet));
                 setGameState(1);
+                updateLeaderboard(userName, credits + (bet), setLeaderboard);
                 setGameOver(true);
                 return;
             } else if (currentScore === 21) {
                 setStateText("Dealer Wins.");
                 setDealerHand(currentDealerHand);
                 setGameState(1);
+                updateLeaderboard(userName, credits, setLeaderboard);
                 setGameOver(true);
                 return;
             }
@@ -161,11 +183,14 @@ export function Play({ userName, credits, setCredits }) {
                 if (currentScore === currentPlayerScore) {
                     setStateText("Push. Bet Returned.");
                     setCredits(credits + (bet));
+                    updateLeaderboard(userName, credits + (bet), setLeaderboard);
                 } else if ((currentScore > currentPlayerScore) || currentPlayerScore > 21) {
                     setStateText("Dealer Wins.");
+                    updateLeaderboard(userName, credits, setLeaderboard);
                 } else {
                     setStateText("Player Wins!");
                     setCredits(credits + (2 * bet));
+                    updateLeaderboard(userName, credits + (2 * bet), setLeaderboard);
                 }
                 setDealerHand(currentDealerHand);
                 setGameState(1);
@@ -248,33 +273,23 @@ export function Play({ userName, credits, setCredits }) {
         }
     }, [gameState]);
 
+    useEffect(() => {
+        updateLeaderboard(userName, credits, setLeaderboard);
+    }, []);
+
+
     return (
         <main className={styles.main}>
             <div className={styles.leaderboard}>
                 <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <td><span>Rank</span></td>
-                            <td><span>Name</span></td>
-                            <td><span>Score</span></td>
-                        </tr>
-                    </thead>
                     <tbody>
-                        <tr>
-                            <td><span>1</span></td>
-                            <td><span id="player-rank-1">Name</span></td>
-                            <td><span id="player-score-1">$1135</span></td>
-                        </tr>
-                        <tr>
-                            <td><span>2</span></td>
-                            <td><span id="player-rank-2">Name</span></td>
-                            <td><span id="player-score-2">$102</span></td>
-                        </tr>
-                        <tr>
-                            <td><span>3</span></td>
-                            <td><span id="player-rank-3">Name</span></td>
-                            <td><span id="player-score-3">$94</span></td>
-                        </tr>
+                        {leaderboard.map((player, index) => (
+                            <tr key={player.name}>
+                                <td><span>{index + 1}</span></td>
+                                <td><span>{player.name}</span></td>
+                                <td><span>${player.credits}</span></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
 
@@ -335,7 +350,7 @@ export function Play({ userName, credits, setCredits }) {
                         switch (gameState) {
                             case 1:
                                 return <div id="game-controls">
-                                    {gameOver && (<button className="button-outline" onClick={() => { setGameState(2); setGameOver(false); }}>New Game</button>)}
+                                    {gameOver && credits > 0 && (<button className="button-outline" onClick={() => { setGameState(2); setGameOver(false); }}>New Game</button>)}
                                 </div>;
                             case 2:
                                 return <div id="bet-controls">
@@ -360,6 +375,7 @@ export function Play({ userName, credits, setCredits }) {
             
             <div className={styles.gameState} id="game-state">
                 <div id="current-turn">{stateText}</div>
+                {gameOver && credits === 0 && (<div id="bet">You're out of credits. Better luck tomorrow!</div>)}
                 {gameOver === false && (<div id="bet">Bet: ${bet}</div>)}
             </div>
         </main>

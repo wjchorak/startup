@@ -8,14 +8,24 @@ export function Unauthenticated(props) {
     const [password, setPassword] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
 
+    async function setUpLeaderboard() {
+        localStorage.setItem("leaderboard", JSON.stringify([
+            { name: "Alice", credits: 26 },
+            { name: "Bob", credits: 57 },
+            { name: "Charlie", credits: 38 }
+        ]));
+    }
+
     async function loginUser() {
         localStorage.setItem('userName', userName);
         props.onLogin(userName);
+        setUpLeaderboard();
     }
 
     async function createUser() {
         localStorage.setItem('userName', userName);
         props.onLogin(userName);
+        setUpLeaderboard();
     }
 
     return (

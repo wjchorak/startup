@@ -49,7 +49,7 @@ export default function App() {
                                 setUserName(userName);
                             }}
                         />} exact />
-                    <Route path='/play' element={<Play credits={credits} setCredits={setCredits} />} />
+                    <Route path='/play' element={<Play userName={userName} credits={credits} setCredits={setCredits} />} />
                     <Route path='/about' element={<About />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
