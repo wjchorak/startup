@@ -89,8 +89,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **All functionality implemented or mocked out** - The full game of blackjack is playable with bets, score leaderboard mockup, dealer logic, and animations. Login placeholder and API call placeholder on about page.
-- [x] **Hooks** - useEffect and useState are used throughout, especially for the game functionality, with scores, hands, leaderboard, and game states using those hooks.
+- [x] **All functionality implemented or mocked out** - The full game of blackjack is playable with bets, score leaderboard mockup, dealer logic, and JS/CSS combo animations on play.jsx page. Login placeholder using localStorage on login.jsx page. API call placeholder on about.jsx page under quote.
+- [x] **Hooks** - useEffect and useState are used throughout, especially for the game functionality, with scores, hands, leaderboard, and game states using both hooks. play.jsx, about.jsx, unauthenticated.jsx, and app.jsx all have useState in them, for things such as username, password, decks and hands of cards, scores, credits, and changing display texts. There are about 50-60 lines worth of useEffect hooks/functionality in play.jsx right before the return statement, lines 216-278, mostly for updating cards, scores, current game stage, and the leaderboard.
 
 ## 🚀 Service deliverable
 
