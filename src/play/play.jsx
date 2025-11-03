@@ -79,20 +79,22 @@ function calculateScore(hand) {
     return score;
 }
 
-function updateLeaderboard(name, credits, setLeaderboard) {
+async function updateLeaderboard(name, credits, setLeaderboard) {
     console.log("Leaderboard updating " + name + " $" + credits + "...")
-    const existing = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
-    const filtered = existing.filter(entry => entry.name !== name);
+    let newScore = { name: name, credits: credits };
 
-    const updated = [...filtered, { name, credits }]
-        .sort((a, b) => b.credits - a.credits)
-        .slice(0, 3);
+    await fetch('/api/credits', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newScore),
+    });
 
-    localStorage.setItem("leaderboard", JSON.stringify(updated));
-    console.log("Saving leaderboard with", JSON.stringify(updated));
-
-    setLeaderboard(updated);
+    fetch('/api/credits')
+        .then((response) => response.json())
+        .then((updated) => {
+            setLeaderboard(updated);
+        });
 }
 
 
