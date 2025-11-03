@@ -20,7 +20,7 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-// THESE ENDPOINTS ARE ALL COPIED/ADAPTED FROM SIMON CODE
+// THESE ENDPOINTS ARE MOSTLY COPIED/ADAPTED FROM SIMON CODE
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
@@ -77,6 +77,24 @@ apiRouter.get('/credits', verifyAuth, (_req, res) => {
 apiRouter.post('/credits', verifyAuth, (req, res) => {
     credits = updateCredits(req.body);
     res.send(credits);
+});
+
+// GetUserCredits
+apiRouter.get('/usercredits', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+
+    if(user) {
+        res.send(user.credits);
+    }
+});
+
+// SubmitUserCredits
+apiRouter.post('/usercredits', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+
+    if(user) {
+        user.credits = req.body;
+    }
 });
 
 // Default error handler
