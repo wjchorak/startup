@@ -73,8 +73,8 @@ apiRouter.get('/credits', verifyAuth, (_req, res) => {
     res.send(credits);
 });
 
-// SubmitScore
-apiRouter.post('/score', verifyAuth, (req, res) => {
+// SubmitCredits
+apiRouter.post('/credits', verifyAuth, (req, res) => {
     credits = updateCredits(req.body);
     res.send(credits);
 });
@@ -89,19 +89,21 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
-// updateCredits considers a new score for inclusion in the high credits/scores list.
-function updateCredits(newScore) {
+// updateCredits considers a new credit score for inclusion in the high credits/score list.
+function updateCredits(newCredits) {
+    credits = credits.filter(c => c.name != newCredits.name);
+
     let found = false;
-    for (const [i, prevScore] of credits.entries()) {
-        if (newScore.score > prevScore.score) {
-            credits.splice(i, 0, newScore);
+    for (const [i, prevCredits] of credits.entries()) {
+        if (newCredits.credits > prevCredits.credits) {
+            credits.splice(i, 0, newCredits);
             found = true;
             break;
         }
     }
 
     if (!found) {
-        credits.push(newScore);
+        credits.push(newCredits);
     }
 
     if (credits.length > 3) {
@@ -117,6 +119,7 @@ async function createUser(userName, password) {
     const user = {
         userName: userName,
         password: passwordHash,
+        credits: 20,
         token: uuid.v4(),
     };
     users.push(user);
