@@ -1,7 +1,8 @@
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
-const express = require('express');
-const uuid = require('express');
+import cookieParser from 'cookie-parser';
+import bcrypt from 'bcryptjs';
+import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
+
 const app = express();
 
 const authCookieName = 'token';
@@ -39,7 +40,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     const user = await findUser('userName', req.body.userName);
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
-            user.token = uuid.v4();
+            user.token = uuidv4();
             setAuthCookie(res, user.token);
             res.send({ userName: user.userName });
             return;
@@ -84,16 +85,18 @@ apiRouter.get('/usercredits', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
 
     if(user) {
-        res.send(user.credits);
+        res.json({ credits: user.credits });
     }
 });
 
 // SubmitUserCredits
 apiRouter.post('/usercredits', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-
-    if(user) {
-        user.credits = req.body;
+    if (user && typeof req.body.credits === 'number') {
+        user.credits = req.body.credits;
+        res.send({ credits: user.credits });
+    } else {
+        res.status(400).send({ msg: 'Invalid credit value' });
     }
 });
 
@@ -138,7 +141,7 @@ async function createUser(userName, password) {
         userName: userName,
         password: passwordHash,
         credits: 20,
-        token: uuid.v4(),
+        token: uuidv4(),
     };
     users.push(user);
 

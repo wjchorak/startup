@@ -5,8 +5,11 @@ export function About() {
     const [joke, setJoke] = useState('Loading...');
 
     React.useEffect(() => {
-        setJoke("Time flies like an arrow. Fruit flies like a banana.");
-    });
+        fetch(`https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single`)
+            .then((response) => response.json())
+            .then((data) => { setJoke(data.joke); })
+            .catch();
+    }, []);
     
     return (
         <main className={styles.main}>

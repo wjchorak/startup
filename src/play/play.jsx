@@ -121,7 +121,19 @@ function changeBet(max, bet, setBet, adding) {
     setBet(newBet);
 }
 
-export function Play({ userName, credits, setCredits }) {
+async function syncUserCredits(credits) {
+    try {
+        await fetch('/api/usercredits', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ credits }),
+        });
+    } catch (err) {
+        console.error('Error updating user credits:', err);
+    }
+}
+
+export function Play({ userName }) {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
     const [dealerScore, setDealerScore] = useState([]);
@@ -132,6 +144,24 @@ export function Play({ userName, credits, setCredits }) {
     const [gameOver, setGameOver] = useState(true);
     const [stateText, setStateText] = useState();
     const [bet, setBet] = useState(1);
+
+    const [credits, setCredits] = useState();
+
+    useEffect(() => {
+        fetch('/api/usercredits')
+            .then(res => res.json())
+            .then(data => setCredits(data.credits))
+            .catch(err => console.error('Error fetching credits:', err));
+    }, []);
+
+    useEffect(() => {
+        fetch('/api/credits')
+            .then(res => res.json())
+            .then(data => setLeaderboard(data))
+            .catch(err => console.error('Error fetching leaderboard:', err));
+    }, []);
+
+
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -154,6 +184,7 @@ export function Play({ userName, credits, setCredits }) {
                 setCredits(credits + (2 * bet));
                 setGameState(1);
                 updateLeaderboard(userName, credits + (2 * bet), setLeaderboard);
+                syncUserCredits(credits + (2 * bet));
                 setGameOver(true);
                 return;
             } else if (currentScore > 21 && currentPlayerScore > 21) {
@@ -162,6 +193,7 @@ export function Play({ userName, credits, setCredits }) {
                 setCredits(credits + (bet));
                 setGameState(1);
                 updateLeaderboard(userName, credits + (bet), setLeaderboard);
+                syncUserCredits(credits + (bet));
                 setGameOver(true);
                 return;
             } else if (currentScore === 21 && currentPlayerScore === 21) {
@@ -170,6 +202,7 @@ export function Play({ userName, credits, setCredits }) {
                 setCredits(credits + (bet));
                 setGameState(1);
                 updateLeaderboard(userName, credits + (bet), setLeaderboard);
+                syncUserCredits(credits + (bet));
                 setGameOver(true);
                 return;
             } else if (currentScore === 21) {
@@ -177,6 +210,7 @@ export function Play({ userName, credits, setCredits }) {
                 setDealerHand(currentDealerHand);
                 setGameState(1);
                 updateLeaderboard(userName, credits, setLeaderboard);
+                syncUserCredits(credits);
                 setGameOver(true);
                 return;
             }
@@ -186,13 +220,16 @@ export function Play({ userName, credits, setCredits }) {
                     setStateText("Push. Bet Returned.");
                     setCredits(credits + (bet));
                     updateLeaderboard(userName, credits + (bet), setLeaderboard);
+                    syncUserCredits(credits + (bet));
                 } else if ((currentScore > currentPlayerScore) || currentPlayerScore > 21) {
                     setStateText("Dealer Wins.");
                     updateLeaderboard(userName, credits, setLeaderboard);
+                    syncUserCredits(credits);
                 } else {
                     setStateText("Player Wins!");
                     setCredits(credits + (2 * bet));
                     updateLeaderboard(userName, credits + (2 * bet), setLeaderboard);
+                    syncUserCredits(credits + (2 * bet));
                 }
                 setDealerHand(currentDealerHand);
                 setGameState(1);
@@ -276,7 +313,9 @@ export function Play({ userName, credits, setCredits }) {
     }, [gameState]);
 
     useEffect(() => {
-        updateLeaderboard(userName, credits, setLeaderboard);
+        if(credits != undefined && credits != null) {
+            updateLeaderboard(userName, credits, setLeaderboard);
+        }
     }, []);
 
 

@@ -27,7 +27,6 @@ export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
-    const [credits, setCredits] = React.useState(localStorage.getItem('credits') || 20);
 
     return (
             <div className="body">
@@ -49,7 +48,7 @@ export default function App() {
                                 setUserName(userName);
                             }}
                         />} exact />
-                    <Route path='/play' element={<Play userName={userName} credits={credits} setCredits={setCredits} />} />
+                    <Route path='/play' element={<Play userName={userName} />} />
                     <Route path='/about' element={<About />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>

@@ -1,0 +1,12 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "description": "This demonstrates a service for a web application.",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "uuid": "^13.0.0"
+  }
+}

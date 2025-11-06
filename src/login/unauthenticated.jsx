@@ -19,7 +19,7 @@ export function Unauthenticated(props) {
     async function loginOrCreate(endpoint) {
         const response = await fetch(endpoint, {
             method: 'post',
-            body: JSON.stringify({ email: userName, password: password }),
+            body: JSON.stringify({ userName: userName, password: password }),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
@@ -49,8 +49,8 @@ export function Unauthenticated(props) {
                     </div>
                     <br />
                     <div className={styles.loginControls}>
-                        <button className={`button-outline ${styles.buttonOutline}`} onClick={() => loginUser()} disabled={!userName || !password}>Login</button>
-                        <button className={`button-outline ${styles.buttonOutline}`} onClick={() => createUser()} disabled={!userName || !password}>Create</button>
+                        <button className={`button-outline ${styles.buttonOutline}`} onClick={(e) => { e.preventDefault(); loginUser(); }} disabled={!userName || !password}>Login</button>
+                        <button className={`button-outline ${styles.buttonOutline}`} onClick={(e) => { e.preventDefault(); createUser(); }} disabled={!userName || !password}>Create</button>
                     </div>
                 </form>
             </div>
