@@ -21,6 +21,30 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
+// These next three are for the daily credit replenish, where users with $0 get 20 at the new day
+// I didn't time it to midnight, but I'll be pushing changes at night, so that's a good enough lazy solution
+
+replenishDailyCredits();
+
+setInterval(replenishDailyCredits, 24 * 60 * 60 * 1000);
+
+function replenishDailyCredits() {
+    const today = new Date().toDateString();
+
+    if (global.lastReset === today) {
+        return;
+    }
+
+    users.forEach(user => {
+        if (user.credits <= 0) {
+            user.credits = 20;
+        }
+    });
+
+    global.lastReset = today;
+    console.log("Daily credits replenished for users at 0");
+}
+
 // THESE ENDPOINTS ARE MOSTLY COPIED/ADAPTED FROM SIMON CODE
 
 // CreateAuth a new user

@@ -96,12 +96,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Added index.js service for login/logout, auth, scores, and leaderboard.
+- [x] **Static middleware for frontend** - Included static middleware through app.use(express.static('public')); line.
+- [x] **Calls to third party endpoints** - Called an API for jokes in about.jsx.
+- [x] **Backend service endpoints** - Endpoints for scores and leaderboard, as well as login/logout.
+- [x] **Frontend calls service endpoints** - play.jsx calls score/leaderboard endpoints, authenticated.jsx and unauthenticated.jsx call login endpoints.
+- [x] **Supports registration, login, logout, and restricted endpoint** - Website requires login to play game.
 
 ## 🚀 DB deliverable
 
