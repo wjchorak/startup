@@ -17,8 +17,8 @@ const creditsCollection = db.collection('credits');
     }
 })();
 
-function getUser(email) {
-    return userCollection.findOne({ email: email });
+function getUser(userName) {
+    return userCollection.findOne({ userName: userName });
 }
 
 function getUserByToken(token) {
@@ -30,18 +30,21 @@ async function addUser(user) {
 }
 
 async function updateUser(user) {
-    await userCollection.updateOne({ email: user.email }, { $set: user });
+    await userCollection.updateOne({ userName: user.userName }, { $set: user });
 }
 
-async function addCredits(credits) {
-    return creditsCollection.insertOne(credits);
+async function updateUserCredits(credits) {
 }
 
-function getHighCredits() {
-    const query = { credits: { $gt: 0, $lt: 900 } };
+async function updateCredits(newCredits) {
+    return creditsCollection.insertOne(newCredits);
+}
+
+function getCredits() {
+    const query = { credits: { $gt: 0, $lt: 10000 } };
     const options = {
         sort: { credit: -1 },
-        limit: 10,
+        limit: 3,
     };
     const cursor = creditsCollection.find(query, options);
     return cursor.toArray();
@@ -53,5 +56,6 @@ module.exports = {
     addUser,
     updateUser,
     addCredits,
-    getHighCredits,
+    updateCredits,
+    getCredits,
 };
