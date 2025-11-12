@@ -4,11 +4,10 @@ import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
+const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-let users = [];
-let credits = [];
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
@@ -65,6 +64,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuidv4();
+            await DB.updateUser(user);
             setAuthCookie(res, user.token);
             res.send({ userName: user.userName });
             return;
@@ -78,6 +78,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         delete user.token;
+        DB.updateUser(user);
     }
     res.clearCookie(authCookieName);
     res.status(204).end();
@@ -94,7 +95,8 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetCredits
-apiRouter.get('/credits', verifyAuth, (_req, res) => {
+apiRouter.get('/credits', verifyAuth, async (_req, res) => {
+    const credits = await DB.getCredits();
     res.send(credits);
 });
 
@@ -135,27 +137,9 @@ app.use((_req, res) => {
 });
 
 // updateCredits considers a new credit score for inclusion in the high credits/score list.
-function updateCredits(newCredits) {
-    credits = credits.filter(c => c.name != newCredits.name);
-
-    let found = false;
-    for (const [i, prevCredits] of credits.entries()) {
-        if (newCredits.credits > prevCredits.credits) {
-            credits.splice(i, 0, newCredits);
-            found = true;
-            break;
-        }
-    }
-
-    if (!found) {
-        credits.push(newCredits);
-    }
-
-    if (credits.length > 3) {
-        credits.length = 3;
-    }
-
-    return credits;
+async function updateCredits(newCredits) {
+    await DB.updateCredits(newCredits);
+    return DB.getCredits();
 }
 
 async function createUser(userName, password) {
@@ -167,7 +151,7 @@ async function createUser(userName, password) {
         credits: 20,
         token: uuidv4(),
     };
-    users.push(user);
+    await DB.addUser(user);
 
     return user;
 }
@@ -175,7 +159,10 @@ async function createUser(userName, password) {
 async function findUser(field, value) {
     if (!value) return null;
 
-    return users.find((u) => u[field] === value);
+    if (field === 'token') {
+        return DB.getUserByToken(value);
+    }
+    return DB.getUser(value);
 }
 
 // setAuthCookie in the HTTP response
