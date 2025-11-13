@@ -43,13 +43,14 @@ async function replenishCredits() {
 }
 
 async function updateCredits(newCredits) {
+    await creditsCollection.deleteMany({ name: newCredits.name });
     return creditsCollection.insertOne(newCredits);
 }
 
 function getCredits() {
     const query = { credits: { $gt: 0, $lt: 10000 } };
     const options = {
-        sort: { credit: -1 },
+        sort: { credits: -1 },
         limit: 3,
     };
     const cursor = creditsCollection.find(query, options);
