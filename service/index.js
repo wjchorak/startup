@@ -34,14 +34,9 @@ function replenishDailyCredits() {
         return;
     }
 
-    users.forEach(user => {
-        if (user.credits <= 0) {
-            user.credits = 20;
-        }
-    });
+    DB.replenishCredits();
 
     global.lastReset = today;
-    console.log("Daily credits replenished for users at 0");
 }
 
 // THESE ENDPOINTS ARE MOSTLY COPIED/ADAPTED FROM SIMON CODE
@@ -120,6 +115,7 @@ apiRouter.post('/usercredits', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user && typeof req.body.credits === 'number') {
         user.credits = req.body.credits;
+        await DB.updateUser(user);
         res.send({ credits: user.credits });
     } else {
         res.status(400).send({ msg: 'Invalid credit value' });

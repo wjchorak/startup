@@ -33,7 +33,13 @@ async function updateUser(user) {
     await userCollection.updateOne({ userName: user.userName }, { $set: user });
 }
 
-async function updateUserCredits(credits) {
+async function replenishCredits() {
+    const result = await users.updateMany(
+        { credits: { $lte: 0 } },
+        { $set: { credits: 20 } }
+    );
+
+    console.log(`Replenished credits for ${result.modifiedCount} users`);
 }
 
 async function updateCredits(newCredits) {
@@ -55,7 +61,7 @@ module.exports = {
     getUserByToken,
     addUser,
     updateUser,
-    addCredits,
+    replenishCredits,
     updateCredits,
     getCredits,
 };
