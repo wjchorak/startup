@@ -1,5 +1,5 @@
-const { MongoClient } = require('mongodb');
-const config = require('./dbConfig.json');
+import { MongoClient } from 'mongodb';
+import config from './dbConfig.json' with { type: 'json' };
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
@@ -34,7 +34,7 @@ async function updateUser(user) {
 }
 
 async function replenishCredits() {
-    const result = await users.updateMany(
+    const result = await userCollection.updateMany(
         { credits: { $lte: 0 } },
         { $set: { credits: 20 } }
     );
@@ -56,7 +56,7 @@ function getCredits() {
     return cursor.toArray();
 }
 
-module.exports = {
+const DatabaseAPI = {
     getUser,
     getUserByToken,
     addUser,
@@ -64,4 +64,7 @@ module.exports = {
     replenishCredits,
     updateCredits,
     getCredits,
+    db,
 };
+
+export default DatabaseAPI;
