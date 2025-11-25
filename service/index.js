@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import DB from './database.js';
+import peerProxy from './peerProxy.js';
 
 const app = express();
 
@@ -171,6 +172,8 @@ function setAuthCookie(res, authToken) {
     });
 }
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
