@@ -58,6 +58,7 @@ class webSocketClient {
 export default function App() {
     const location = useLocation();
     const showNavbar = NAVBAR_ROUTES.includes(location.pathname);
+    const ws = React.useMemo(() => new webSocketClient(), []);
 
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
@@ -83,7 +84,7 @@ export default function App() {
                                 setUserName(userName);
                             }}
                         />} exact />
-                    <Route path='/play' element={<Play userName={userName} websocket={new webSocketClient()}/>} />
+                    <Route path='/play' element={<Play userName={userName} websocket={ws}/>} />
                     <Route path='/about' element={<About />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>

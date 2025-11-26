@@ -161,6 +161,25 @@ export function Play({ userName, webSocketClient }) {
             .catch(err => console.error('Error fetching leaderboard:', err));
     }, []);
 
+    useEffect(() => {
+        const handler = ({ event, from, msg }) => {
+            if(event === 'received') {
+                fetch('/api/credits')
+                    .then((response) => response.json())
+                    .then((updated) => {
+                        setLeaderboard(updated);
+                    });
+            }
+        };
+
+        websocket.addObserver(handler);
+
+        return () => {
+            websocket.observers = websocket.observers.filter(h => h !== handler);
+        }
+
+    }, [websocket]);
+
 
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
