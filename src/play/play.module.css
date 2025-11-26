@@ -77,6 +77,12 @@
     transition: transform 0.3s ease;
 }
 
+.playingCard:hover {
+    transform: translateY(-8px) rotateZ(1deg) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+
 .red {
     color: #822525;
 }
