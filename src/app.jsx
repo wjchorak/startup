@@ -25,7 +25,19 @@ class webSocketClient {
     connected = false;
 
     constructor() {
-        //constructor
+        const protocol = window.location.protocol === 'http' ? 'ws' : 'wss';
+        this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+        this.socket.onopen = (event) => {
+            this.notifyObservers('system', 'websocket', 'connected');
+            this.connected = true;
+        };
+
+        this.socket.onmessage = async (event) => {
+            const text = await event.data.text();
+            const msg = JSON.parse(text);
+            this.notifyObservers('received', msg.name, msg.score);
+        }
     }
 
     sendMessage(name, msg) {
@@ -39,6 +51,7 @@ class webSocketClient {
 
     notifyObservers(event, from, msg) {
         this.observers.forEach((h) => h({ event, from, msg }));
+        console.log('event: %s \nfrom: %s \nmsg: %s', event, from, msg);
     }
 }
 
