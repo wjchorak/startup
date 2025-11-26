@@ -43,17 +43,17 @@ h1 {
 .loginEnter {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #dce1de;
+    border-bottom: 1px solid #F2F2F2;
     outline: none;
     padding: 8px 4px;
     font-size: 16px;
-    color: #dce1de;
+    color: #F2F2F2;
     width: 100%;
 }
 
 .loginEnter:focus {
     background-color: #1F2421;
-    color: #dce1de;
+    color: #F2F2F2;
 }
 
 @media (max-width: 1000px) {

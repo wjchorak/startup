@@ -64,10 +64,9 @@
 .playingCard {
     height: 120px;
     width: 80px;
-    background-color: #9cc5a1;
-    border: 2px solid #49a078;
+    background-color: #F2F2F2;
+    border: 2px solid #D4AF37;
     border-radius: 5px;
-    color: #216869;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,6 +75,14 @@
     font-weight: bold;
     position: relative;
     transition: transform 0.3s ease;
+}
+
+.red {
+    color: #822525;
+}
+
+.black {
+    color : #1A1F2B;
 }
 
 .cornerTop, .cornerBottom {
@@ -109,7 +116,7 @@
 .table {
     width: 100px;
     margin: 20px;
-    border: 2px solid #9cc5a1;
+    border: 2px solid #D4AF37;
     border-collapse: separate;
     border-radius: 8px;
     border-spacing: 0;
@@ -129,7 +136,7 @@
 
 td {
     padding: 6px 12px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #D4AF37;
 }
 
 tr:last-child td {

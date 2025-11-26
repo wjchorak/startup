@@ -207,7 +207,7 @@ export function Play({ userName, websocket }) {
             console.log("Current Score: " + currentScore);
 
             if (currentScore > 21 && currentPlayerScore <= 21) {
-                setStateText("Dealer Busts, Player Wins!");
+                setStateText("Dealer Busts, " + userName + " Wins!");
                 setDealerHand(currentDealerHand);
                 setCredits(credits + (2 * bet));
                 setGameState(1);
@@ -258,7 +258,7 @@ export function Play({ userName, websocket }) {
                     updateLeaderboard(userName, credits, setLeaderboard);
                     syncUserCredits(credits);
                 } else {
-                    setStateText("Player Wins!");
+                    setStateText(userName + " Wins!");
                     setCredits(credits + (2 * bet));
                     updateLeaderboard(userName, credits + (2 * bet), setLeaderboard);
                     syncUserCredits(credits + (2 * bet));
@@ -378,9 +378,10 @@ export function Play({ userName, websocket }) {
                 <div className={styles.cardContainer} id="dealer-cards">
                     {dealerHand.map((card, index) => {
                         const cardClasses = `${styles.playingCard} ${card.isNew ? styles.dealingCard : ''}`;
+                        const colorClass = (card.suit === '♥' || card.suit === '♦') ? styles.red : styles.black;
 
                         return (
-                            <div key={card.id} className={cardClasses}>
+                            <div key={card.id} className={`${cardClasses} ${colorClass}`}>
                                 <div className={styles.cornerTop}>
                                     {card.display} {card.suit}
                                 </div>
@@ -400,9 +401,10 @@ export function Play({ userName, websocket }) {
                 <div className={styles.cardContainer} id="player-cards">
                     {playerHand.map((card, index) => {
                         const cardClasses = `${styles.playingCard} ${card.isNew ? styles.dealingCard : ''}`;
+                        const colorClass = (card.suit === '♥' || card.suit === '♦') ? styles.red : styles.black;
 
                         return (
-                            <div key={card.id} className={cardClasses}>
+                            <div key={card.id} className={`${cardClasses} ${colorClass}`}>
                                 <div className={styles.cornerTop}>
                                     {card.display} {card.suit}
                                 </div>
