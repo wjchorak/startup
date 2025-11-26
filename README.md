@@ -118,4 +118,4 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Frontend makes WebSocket connection** - WebSocket connection is opened in app.jsx and passed to play.jsx
 - [x] **Data sent over WebSocket connection** - A ping is sent over WebSocket every time a user finishes a game, which prompts other users' leaderboards to update.
 - [x] **WebSocket data displayed** - Technically, no data is needed to "display" though the name and timestamp is logged with each received message. The actual content from each change on another client is sent to the database and WebSocket prompts a refresh of info from the DB.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Application is fully functional** - Everything is working as intended, no placeholders.

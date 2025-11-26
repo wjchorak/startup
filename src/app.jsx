@@ -25,7 +25,7 @@ class webSocketClient {
     connected = false;
 
     constructor() {
-        const protocol = window.location.protocol === 'http' ? 'ws' : 'wss';
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
 
         this.socket.onopen = (event) => {
