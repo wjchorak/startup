@@ -36,7 +36,7 @@ class webSocketClient {
         this.socket.onmessage = async (event) => {
             const text = await event.data.text();
             const msg = JSON.parse(text);
-            this.notifyObservers('received', msg.name, msg.score);
+            this.notifyObservers('received', msg.name, msg.time);
         }
     }
 

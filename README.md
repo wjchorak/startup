@@ -115,7 +115,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **Backend listens for WebSocket connection** - peerProxy.js defines a websocket server which listens for messages and forwards between clients.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
+- [x] **Frontend makes WebSocket connection** - WebSocket connection is opened in app.jsx and passed to play.jsx
+- [x] **Data sent over WebSocket connection** - A ping is sent over WebSocket every time a user finishes a game, which prompts other users' leaderboards to update.
+- [x] **WebSocket data displayed** - Technically, no data is needed to "display" though the name and timestamp is logged with each received message. The actual content from each change on another client is sent to the database and WebSocket prompts a refresh of info from the DB.
 - [ ] **Application is fully functional** - I did not complete this part of the deliverable.

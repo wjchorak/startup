@@ -184,6 +184,15 @@ export function Play({ userName, webSocketClient }) {
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+    function broadcastGameResult() {
+        if (!websocket) return;
+
+        websocket.sendMessage(userName, {
+            time: Date.now()
+        });
+    }
+
+
     const dealerTurn = async () => {
         let currentDealerHand = [...dealerHand];
         let currentDeck = [...deck];
@@ -205,6 +214,7 @@ export function Play({ userName, webSocketClient }) {
                 updateLeaderboard(userName, credits + (2 * bet), setLeaderboard);
                 syncUserCredits(credits + (2 * bet));
                 setGameOver(true);
+                broadcastGameResult();
                 return;
             } else if (currentScore > 21 && currentPlayerScore > 21) {
                 setStateText("Push. Bet Returned.");
@@ -214,6 +224,7 @@ export function Play({ userName, webSocketClient }) {
                 updateLeaderboard(userName, credits + (bet), setLeaderboard);
                 syncUserCredits(credits + (bet));
                 setGameOver(true);
+                broadcastGameResult();
                 return;
             } else if (currentScore === 21 && currentPlayerScore === 21) {
                 setStateText("Push. Bet Returned.");
@@ -223,6 +234,7 @@ export function Play({ userName, webSocketClient }) {
                 updateLeaderboard(userName, credits + (bet), setLeaderboard);
                 syncUserCredits(credits + (bet));
                 setGameOver(true);
+                broadcastGameResult();
                 return;
             } else if (currentScore === 21) {
                 setStateText("Dealer Wins.");
@@ -231,6 +243,7 @@ export function Play({ userName, webSocketClient }) {
                 updateLeaderboard(userName, credits, setLeaderboard);
                 syncUserCredits(credits);
                 setGameOver(true);
+                broadcastGameResult();
                 return;
             }
 
@@ -253,6 +266,7 @@ export function Play({ userName, webSocketClient }) {
                 setDealerHand(currentDealerHand);
                 setGameState(1);
                 setGameOver(true);
+                broadcastGameResult();
                 return;
             }
 
