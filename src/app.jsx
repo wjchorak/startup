@@ -20,6 +20,28 @@ const Navbar = () => {
     );
 };
 
+class webSocketClient {
+    observers = [];
+    connected = false;
+
+    constructor() {
+        //constructor
+    }
+
+    sendMessage(name, msg) {
+        this.notifyObservers('sent', 'me', msg);
+        this.socket.send(JSON.stringify({ name, msg }));
+    }
+
+    addObserver(observer) {
+        this.observers.push(observer);
+    }
+
+    notifyObservers(event, from, msg) {
+        this.observers.forEach((h) => h({ event, from, msg }));
+    }
+}
+
 export default function App() {
     const location = useLocation();
     const showNavbar = NAVBAR_ROUTES.includes(location.pathname);
@@ -48,7 +70,7 @@ export default function App() {
                                 setUserName(userName);
                             }}
                         />} exact />
-                    <Route path='/play' element={<Play userName={userName} />} />
+                    <Route path='/play' element={<Play userName={userName} websocket={new webSocketClient()}/>} />
                     <Route path='/about' element={<About />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
@@ -64,5 +86,5 @@ export default function App() {
 }
 
 function NotFound() {
-  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
+    return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }

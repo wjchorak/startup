@@ -133,7 +133,7 @@ async function syncUserCredits(credits) {
     }
 }
 
-export function Play({ userName }) {
+export function Play({ userName, webSocketClient }) {
     const [deck, setDeck] = useState(() => getNewDeck());
     const [dealerHand, setDealerHand] = useState([]);
     const [dealerScore, setDealerScore] = useState([]);
