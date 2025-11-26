@@ -149,15 +149,18 @@ tr:last-child td {
     border-bottom: none;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
     .main {
-        overflow: scroll;
         flex-direction: column;
         margin: 5px;
     }
 
     .leaderboard {
-        align-self: center;
+        flex: 0.2;
+    }
+
+    .table {
+        display: none;
     }
 
     .game {
@@ -167,5 +170,9 @@ tr:last-child td {
     .gameStateS {
         margin-bottom: 30vh;
         align-self: center;
+    }
+
+    .dealer-score, .player-score {
+        margin-bottom: 45px;
     }
 }
